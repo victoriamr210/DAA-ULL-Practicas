@@ -42,8 +42,9 @@ void input_tape::readFile(void){
 void input_tape::print(void){
   std::cout << "Cinta entrada\n ";
   for(int i=0; i<t_.size(); i++){
-    std::cout << i << ": " << t_[i] << "\n";
+    std::cout << i << ": " << t_[i] << "/";
   }
+  std::cout << "\n\n";
 }
 
 output_tape::output_tape(char* f){
@@ -61,7 +62,7 @@ void output_tape::write_file(void){
   f.open(file_);
   int i=0;
   if(f.is_open()){
-    while(!f.eof()){
+    while(i<t_.size()){
       f << t_[i];
       f << "\n";
       i++;
@@ -75,7 +76,8 @@ void output_tape::write_file(void){
 void output_tape::print(void){
   std::cout << "Cinta salida\n";
   for(int i=0; i<t_.size(); i++){
-    std::cout << i << ": " << t_[i] << "\n";
+    std::cout << i << ": " << t_[i] << " | ";
   }
+  std::cout << "\n\n";
 }
 

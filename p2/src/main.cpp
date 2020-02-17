@@ -3,14 +3,16 @@
 #include "../include/cinta.hpp"
 #include "../include/memoria.hpp"
 #include "../include/programa.hpp"
+#include "../include/instruccion.hpp"
+#include "../include/simulador.hpp"
 
-void estado(memory &m, input_tape &i, output_tape &o, program &p){
+void estado(simulator &sim){
 	std::cout << "\n" << std::setw(40) << "Estado de la máquina:"<< "\n\n";
-	i.print();
-	m.print();
-	p.print_ins();
-	p.print_label();
-	o.print();
+	sim.input_.print();
+	sim.mem_.print();
+	sim.pr_.print_ins();
+	sim.pr_.print_label();
+	sim.output_.print();
 }
 
 char menu(void){
@@ -37,8 +39,11 @@ int main(int argc, char *argv[]) {
 		program p(argv[1]);
 		input_tape input(argv[2]);
 		output_tape output(argv[3]);
-		estado(m, input, output, p);
+		instruction ins;
+		simulator sim(m,p,input,output);
+		int pc=0;
 		std::string debug=argv[4];
+		// p.print_ins();
 
 		if(debug=="1"){
 			char op;
@@ -88,6 +93,44 @@ int main(int argc, char *argv[]) {
 				}
 
 			}while(op!='x');
+		}else{
+			pc=0;
+			try{
+
+				ins.set(p.get_i(pc));
+				p.print_ins();
+			// for(int i=0; i<30; i++){
+				while(!ins.is_halt()){
+					sim.set_i(ins);
+					sim.execute();
+					if(ins.jump){
+						std::cout << "if\n";
+						if(sim.next_inst() !=-1){
+							std::cout << "next\n";
+							pc=sim.next_inst();
+						}else{
+							pc++;
+						}
+					}else{
+						std::cout << "else\n";
+						pc++;
+					}	
+					std::cout << "pc:" << pc << "\n";
+					ins.print();
+					ins.set(p.get_i(pc));
+					sim.mem_.print();
+					sim.output_.print();
+				}
+
+			}catch(std::string &e){
+				std::cout << e << "\n";
+			}
+					
+					// pc++;
+				
+			
+			
+			
 		}
 
 	}else{

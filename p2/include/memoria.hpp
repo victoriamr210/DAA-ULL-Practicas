@@ -14,5 +14,6 @@ class memory{
     int load(int pos);
 
     void print(void);
+    int get_acc(void);
 
 };

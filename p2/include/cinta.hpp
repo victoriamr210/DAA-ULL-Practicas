@@ -22,6 +22,7 @@ class input_tape : public tape{
 
   public:
     input_tape(char* f);
+    input_tape(){}
     int read(void);
     void readFile(void);
     void print(void);
@@ -32,6 +33,7 @@ class output_tape : public tape{
 
   public:
     output_tape(char* f);
+    output_tape(){}
     void write(int a);
     void write_file(void);
     void print(void);

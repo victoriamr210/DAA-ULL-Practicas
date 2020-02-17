@@ -9,7 +9,11 @@ void memory::store(int pos, int val){
 }
 
 int memory::load(int pos){
-  m_[0]=m_[pos];
+  return m_[pos];
+}
+
+int memory::get_acc(void){
+  return m_[0];
 }
 
 void memory::print(void){

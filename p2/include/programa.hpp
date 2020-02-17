@@ -15,11 +15,13 @@ class program{
     
   public:
     program(char* file);
-    // program(){}
+    program(){}
     ~program(){}
 
     void build(char* file);
     void print_ins(void);
     void print_label(void);
+    std::string get_i(int pos);
+    int get_next_jump(std::string aux);
 
 };

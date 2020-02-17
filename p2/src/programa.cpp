@@ -63,3 +63,16 @@ void program::print_label(void){
   }
   std::cout << "\n\n";
 }
+
+
+std::string program::get_i(int pos){
+  return ins_[pos];
+}
+
+int program::get_next_jump(std::string aux){
+  for(int i=0; i<label_.size(); i++){
+    if(label_[i].first==aux){
+      return label_[i].second;
+    }
+  }
+}

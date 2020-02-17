@@ -42,14 +42,14 @@ void input_tape::readFile(void){
 void input_tape::print(void){
   std::cout << "Cinta entrada\n ";
   for(int i=0; i<t_.size(); i++){
-    std::cout << i << ": " << t_[i] << "/";
+    std::cout << i << ":" << t_[i] << " | ";
   }
   std::cout << "\n\n";
 }
 
 output_tape::output_tape(char* f){
   file_=f;
-  t_.resize(10);
+  t_.resize(10,-1);
 }
 
 void output_tape::write(int a){

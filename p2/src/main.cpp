@@ -32,47 +32,46 @@ char menu(void){
 }
 
 void ex_step(RAM &sim, int &pc, instruction &ins){
-	// try{
-	// 	sim.execute();
-	// 	if(ins.jump){
-	// 		if(sim.next_inst() !=-1){
-	// 			pc=sim.next_inst();
-	// 		}else{
-	// 			pc++;
-	// 		}
-	// 	}else{
-	// 		pc++;
-	// 	}	
-	// }catch(std::string &e){
-	// 	std::cout << e << "\n";
-	// }
+	try{
+		sim.execute();
+		if(ins.jump){
+			if(sim.next_inst() !=-1){
+				pc=sim.next_inst();
+			}else{
+				pc++;
+			}
+		}else{
+			pc++;
+		}	
+	}catch(std::string &e){
+		std::cout << e << "\n";
+	}
 }
 
-int ex(RAM &sim, int &pc, instruction &ins, program &p){
-	int ins_num=0;
-	// try{
+int ex(RAM &sim, int &pc, instruction &ins, program &p, int &count){
+	try{
 
-	// 	ins.set(p.get_i(pc));
-	// 	while(!ins.is_halt()){
-	// 		sim.set_i(ins);
-	// 		sim.execute();
-	// 		if(ins.jump){
-	// 			if(sim.next_inst() !=-1){
-	// 				pc=sim.next_inst();
-	// 			}else{
-	// 				pc++;
-	// 			}
-	// 		}else{
-	// 			pc++;
-	// 		}	
-	// 		ins.set(p.get_i(pc));
-	// 		ins_num++;
-	// 	}
-	// 	std::cout << "Se han ejecutado " << ins_num+1 << " instrucciones\n";
-	// 	sim.output_.write_file();
-	// }catch(std::string &e){
-	// 	std::cout << e << "\n";
-	// }
+		ins.set(p.get_i(pc));
+		while(!ins.is_halt()){
+			sim.set_i(ins);
+			sim.execute();
+			if(ins.jump){
+				if(sim.next_inst() !=-1){
+					pc=sim.next_inst();
+				}else{
+					pc++;
+				}
+			}else{
+				pc++;
+			}	
+			ins.set(p.get_i(pc));
+			count++;
+		}
+		std::cout << "Se han ejecutado " << count+1 << " instrucciones\n";
+		sim.output_.write_file();
+	}catch(std::string &e){
+		std::cout << e << "\n";
+	}
 }
 
 int main(int argc, char *argv[]) {
@@ -85,15 +84,16 @@ int main(int argc, char *argv[]) {
 		output_tape output(argv[3]);
 		instruction ins;
 		RAM sim(m,p,input,output);
-		int pc=0;
+		int pc = 0;
+		int count = 0;
 		std::string debug=argv[4];
-		// p.print_ins();
+		p.print_ins();
 
 		if(debug=="1"){
 			char op;
 			do{
-				// ins.set(p.get_i(pc));
-				// sim.set_i(ins);
+				ins.set(p.get_i(pc));
+				sim.set_i(ins);
 				op=menu();
 				switch(op){
 					case 'r':
@@ -102,29 +102,30 @@ int main(int argc, char *argv[]) {
 						break;
 					
 					case 't':
-						// std::cout << "\n";
-						// std::cout << "Mostrar traza\n";
-						// if(!ins.is_halt()){
-						// 	// ins.desc();
-						// 	// ex_step(sim,pc,ins);
-						// }else{
-						// 	std::cout << "Programa finalizado\n";
-						// 	sim.output_.print();
-						// 	op='x';
-						// }
+						std::cout << "\n";
+						std::cout << "Mostrar traza\n";
+						if(!ins.is_halt()){
+							ins.desc();
+							count++;
+							ex_step(sim,pc,ins);
+						}else{
+							std::cout << "Programa finalizado\n";
+							sim.output_.print();
+							op='x';
+						}
 						break;
 
 					case 'e':
 						// std::cout << "\n";
 						// std::cout << "Ejecutar instruccion\n";
-						// ex(sim,pc,ins,p);		
+						ex(sim,pc,ins,p,count);		
 						op='x';
 						break;
 					
 					case 's':
 						// std::cout << "\n";
 						// std::cout << "Mostrar opcode\n";
-						// ins.get_opcode();
+						ins.get_opcode();
 						p.print();
 						break;
 					
@@ -154,7 +155,7 @@ int main(int argc, char *argv[]) {
 		}else{
 			pc=0;
 
-			// ex(sim,pc,ins,p);
+			ex(sim,pc,ins,p,count);
 		}
 
 	}else{

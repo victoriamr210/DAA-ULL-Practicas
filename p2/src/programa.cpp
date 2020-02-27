@@ -76,3 +76,14 @@ int program::get_next_jump(std::string aux){
     }
   }
 }
+
+void program::print(void){
+  for(int i=0; i<ins_.size(); i++){
+    for(int j=0; j<label_.size(); j++){
+      if(i==label_[j].second){
+        std::cout << label_[j].first << ": ";
+      }
+    }
+      std::cout << ins_[i] << "\n";
+  }
+}

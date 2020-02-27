@@ -5,7 +5,7 @@
 #include "programa.hpp"
 #include "cinta.hpp"
 
-class simulator{
+class RAM{
 
   public:
     memory mem_;
@@ -18,7 +18,7 @@ class simulator{
   
   public:
 
-    simulator(memory &m, program &p, input_tape &i, output_tape &o);
+    RAM(memory &m, program &p, input_tape &i, output_tape &o);
     void set_i(instruction &i);
     void execute(void);
     int next_inst(void);

@@ -6,13 +6,13 @@ ODIR=../src
 
 LIBS=-lm
 
-_OBJ = main.o cinta.o memoria.o programa.o instruccion.o simulador.o
+_OBJ = main.o cinta.o memoria.o programa.o instruccion.o ram.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: main
 
 
-$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/cinta.hpp
+$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/cinta.hpp $(IDIR)/memoria.hpp $(IDIR)/programa.hpp $(IDIR)/instruccion.hpp $(IDIR)/ram.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/cinta.o: $(ODIR)/cinta.cpp $(IDIR)/cinta.hpp
@@ -27,7 +27,7 @@ $(ODIR)/programa.o: $(ODIR)/programa.cpp $(IDIR)/programa.hpp
 $(ODIR)/instruccion.o: $(ODIR)/instruccion.cpp $(IDIR)/instruccion.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/simulador.o: $(ODIR)/simulador.cpp $(IDIR)/simulador.hpp
+$(ODIR)/ram.o: $(ODIR)/ram.cpp $(IDIR)/ram.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)

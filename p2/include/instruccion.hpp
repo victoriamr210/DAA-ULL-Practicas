@@ -13,6 +13,7 @@ class instruction{
     bool jump=false;
     int number;
     int dir;
+    std::string opcode;
 
   public:
 
@@ -25,4 +26,7 @@ class instruction{
     void set_op(void);
     void reset(void);
     void print(void);
+    void desc(void);
+    void get_opcode(void);
+    void keyword(void);
 };

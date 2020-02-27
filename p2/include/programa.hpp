@@ -23,5 +23,5 @@ class program{
     void print_label(void);
     std::string get_i(int pos);
     int get_next_jump(std::string aux);
-
+    void print(void);
 };

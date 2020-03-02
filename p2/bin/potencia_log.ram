@@ -1,0 +1,24 @@
+          read 1
+          load 1
+          store 3
+          jgtz if
+          jzero if
+          jump else
+if:       load =1
+          store 2
+while:    load 3
+          sub 2
+          jgtz cont
+          jump endwhile
+cont:     load 1
+          mul 1
+          store 1
+          load 2
+          mul =2
+          store 2
+          jump while
+endwhile: write 1
+          jump final
+else:     write =0
+final:    halt
+

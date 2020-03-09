@@ -1,0 +1,14 @@
+main.o: main.cpp framework/Framework.h framework/Problema.h \
+ framework/Solucion.h examples/FibonacciP.h \
+ examples/../framework/Problema.h examples/FibonacciS.h \
+ examples/../framework/Solucion.h examples/FibonacciS.h
+Framework.o: framework/Framework.cpp framework/Framework.h \
+ framework/Problema.h framework/Solucion.h
+Problema.o: framework/Problema.cpp framework/Problema.h \
+ framework/Solucion.h
+Solucion.o: framework/Solucion.cpp framework/Solucion.h
+FibonacciP.o: examples/FibonacciP.cpp examples/FibonacciP.h \
+ examples/../framework/Problema.h examples/../framework/Solucion.h \
+ examples/FibonacciS.h examples/../framework/Solucion.h
+FibonacciS.o: examples/FibonacciS.cpp examples/FibonacciS.h \
+ examples/../framework/Solucion.h

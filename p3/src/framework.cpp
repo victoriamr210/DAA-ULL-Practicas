@@ -5,7 +5,6 @@ framework::~framework() {}
 
 void framework::divideyVenceras(problem* p, solution* s){
 	if (p->isMin()){
-		// std::cout << "if_min "; 
 		p->solve(s);
 	}
 	else{

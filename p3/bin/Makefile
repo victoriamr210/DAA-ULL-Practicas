@@ -6,19 +6,25 @@ ODIR=../src
 
 LIBS=-lm
 
-_OBJ = main.o mergesortS.o mergesortP.o framework.o problem.o solution.o
+_OBJ = main.o mergesortS.o mergesortP.o quicksortP.o quicksortS.o framework.o problem.o solution.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: main
 
 
-$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/mergesortS.hpp $(IDIR)/mergesortP.hpp $(IDIR)/framework.hpp 
+$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/mergesortS.hpp $(IDIR)/mergesortP.hpp $(IDIR)/framework.hpp $(IDIR)/quicksortP.hpp $(IDIR)/quicksortS.hpp 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/mergesortP.o: $(ODIR)/mergesortP.cpp $(IDIR)/mergesortP.hpp $(IDIR)/problem.hpp 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/mergesortS.o: $(ODIR)/mergesortS.cpp $(IDIR)/mergesortS.hpp $(IDIR)/solution.hpp 
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/quicksortP.o: $(ODIR)/quicksortP.cpp $(IDIR)/quicksortP.hpp $(IDIR)/problem.hpp 
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/quicksortS.o: $(ODIR)/quicksortS.cpp $(IDIR)/quicksortS.hpp $(IDIR)/solution.hpp 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/framework.o: $(ODIR)/framework.cpp $(IDIR)/framework.hpp

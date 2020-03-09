@@ -22,16 +22,16 @@ void mergesortS::combine(std::pair<solution *, solution *> subS){
   int k = 0;
 
   v_.resize(aux1.size() + aux2.size());
-  std::cout << v_.size() << "\n";
+  // std::cout << v_.size() << "\n";
 
   while(i < aux1.size() && j < aux2.size()){
     if(aux1[i] <= aux2[j]){
       v_[k] = aux1[i];
-      std::cout << aux1[i] << " <= " << aux2[j] << "\n";
+      // std::cout << aux1[i] << " <= " << aux2[j] << "\n";
       i++;
     } else {
       v_[k] = aux2[j];
-      std::cout << aux1[i] << " > " << aux2[j] << "\n";
+      // std::cout << aux1[i] << " > " << aux2[j] << "\n";
       j++;
     }
     k++;

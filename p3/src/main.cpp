@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "../include/mergesortP.hpp"
 #include "../include/mergesortS.hpp"
+#include "../include/quicksortP.hpp"
+#include "../include/quicksortS.hpp"
 #include "../include/framework.hpp"
 
 void fill(std::vector<int> &v, int size){
@@ -30,7 +32,12 @@ int main(int argc, char *argv[]) {
 	framework* f = new framework();
 
 	f->divideyVenceras(p,s);
-	std::cout << "\nResultado\n";
+	std::cout << "\nResultado merge sort\n";
 	s->solve_s();
 
+	p = new quicksortP(&v,0,9);
+	s = new quicksortS();
+	f->divideyVenceras(p,s);
+	std::cout << "\nResultado quicksort\n";
+	s->solve_s();
 }

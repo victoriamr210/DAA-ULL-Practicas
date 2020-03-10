@@ -11,13 +11,42 @@ void RAM::set_i(instruction &i){
   ins_ = i;
 }
 
+void RAM::print_mem(void){
+  mem_.print();
+}
+
+void RAM::print_output(void){
+  output_.print();
+}
+
+int RAM::next_inst(void){
+  return jump_to_;
+}
+
+void RAM::print_labels(void){
+  pr_.print_label();
+}
+
+void RAM::print_program(void){
+  pr_.print_ins();
+}
+
+void RAM::print_input(void){
+  input_.print();
+}
+
+void RAM::write_file(void){
+  output_.write_file();
+}
 
 void RAM::execute(void){
+
 
   if(ins_.instruc_=="read" || ins_.instruc_=="READ"){
     mem_.store(ins_.number,input_.read());
   
   }else if(ins_.instruc_=="load" || ins_.instruc_=="LOAD"){
+    
     if(ins_.symbol == '='){
       mem_.store(0,ins_.number);
     }else{
@@ -28,7 +57,7 @@ void RAM::execute(void){
     }
 
   }else if(ins_.instruc_=="store" || ins_.instruc_=="STORE"){
-    if(ins_.symbol=='='){
+    if(ins_.symbol == '='){
       std::string e = "Instruccion ilegal";
       throw e;
     }else{
@@ -76,7 +105,7 @@ void RAM::execute(void){
       }
     }
 
-  }else if(ins_.instruc_=="mult" || ins_.instruc_=="MULT"){
+  }else if(ins_.instruc_=="mul" || ins_.instruc_=="MUL"){
     if(ins_.symbol == '='){
       mem_.store(0, mem_.load(0) * ins_.number);
     }else{
@@ -115,7 +144,6 @@ void RAM::execute(void){
 
   }else if(ins_.instruc_=="jump" || ins_.instruc_=="JUMP"){
     jump_to_=pr_.get_next_jump(ins_.op_);
-    // std::cout << "jump_to:" << jump_to_ << "\n";
 
   }else if(ins_.instruc_=="jzero" || ins_.instruc_=="JZERO"){
     if(mem_.load(0) == 0){
@@ -125,13 +153,13 @@ void RAM::execute(void){
     }
   
   }else if(ins_.instruc_=="jgtz" || ins_.instruc_=="JGTZ"){
-    if(mem_.load(0) < 0){
+    if(mem_.load(0) > 0){
       jump_to_ = pr_.get_next_jump(ins_.op_);
     }else{
       jump_to_ = -1;
     }
   }else{
-    std::string e ="Instruccion no existe";
+    std::string e ="Instruccion no existe" + ins_.instruc_;
     throw e;
   }
 
@@ -139,6 +167,3 @@ void RAM::execute(void){
 }
 
 
-int RAM::next_inst(void){
-  return jump_to_;
-}

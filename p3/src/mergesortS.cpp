@@ -5,12 +5,20 @@ mergesortS::~mergesortS(){}
 
 void mergesortS::solve_s(void){
 
-    for(int i=0; i<v_.size(); i++){
-      if(i!=0){
-        if(v_[i-1] <= v_[i]){
-          std::cout << v_[i] << " ";
-        }
-      } else {
+    bool ordered = true;
+    for(int i=1; i<v_.size(); i++){
+      // if(i!=0){
+        if(v_[i-1] > v_[i]){
+          ordered = false;
+          break;
+        } 
+      // } 
+    }
+
+    if (!ordered) {
+      std::cout << "vector desordenado";
+    } else {
+      for(int i =0; i<v_.size(); i++){
         std::cout << v_[i] << " ";
       }
     }

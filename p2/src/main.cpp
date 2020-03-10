@@ -8,11 +8,11 @@
 
 void estado(RAM &sim){
 	std::cout << "\n" << std::setw(40) << "Estado de la máquina:"<< "\n\n";
-	sim.input_.print();
-	sim.mem_.print();
-	sim.pr_.print_ins();
-	sim.pr_.print_label();
-	sim.output_.print();
+	sim.print_input();
+	sim.print_input();
+	sim.print_program();
+	sim.print_labels();
+	sim.print_output();
 }
 
 char menu(void){
@@ -31,8 +31,9 @@ char menu(void){
 	return opcion;
 }
 
-void ex_step(RAM &sim, int &pc, instruction &ins){
+void ex_step(RAM &sim, int &pc, instruction &ins, program &p){
 	try{
+		ins.set(p.get_i(pc));
 		sim.execute();
 		if(ins.jump){
 			if(sim.next_inst() !=-1){
@@ -48,11 +49,13 @@ void ex_step(RAM &sim, int &pc, instruction &ins){
 	}
 }
 
-int ex(RAM &sim, int &pc, instruction &ins, program &p, int &count){
+int ex(RAM &sim, int &pc, instruction &ins, program &p, int &count, memory &m){
+	sim.print_labels();
 	try{
-
+		sim.print_input();
 		ins.set(p.get_i(pc));
 		while(!ins.is_halt()){
+			// ins.print();
 			sim.set_i(ins);
 			sim.execute();
 			if(ins.jump){
@@ -64,11 +67,14 @@ int ex(RAM &sim, int &pc, instruction &ins, program &p, int &count){
 			}else{
 				pc++;
 			}	
+			// sim.print_mem();
+			
 			ins.set(p.get_i(pc));
 			count++;
 		}
+		sim.print_output();
 		std::cout << "Se han ejecutado " << count+1 << " instrucciones\n";
-		sim.output_.write_file();
+		sim.write_file();
 	}catch(std::string &e){
 		std::cout << e << "\n";
 	}
@@ -98,7 +104,7 @@ int main(int argc, char *argv[]) {
 				switch(op){
 					case 'r':
 						std::cout << "\n";
-						m.print();
+						sim.print_mem();
 						break;
 					
 					case 't':
@@ -107,10 +113,10 @@ int main(int argc, char *argv[]) {
 						if(!ins.is_halt()){
 							ins.desc();
 							count++;
-							ex_step(sim,pc,ins);
+							ex_step(sim,pc,ins,p);
 						}else{
 							std::cout << "Programa finalizado\n";
-							sim.output_.print();
+							sim.print_output();
 							op='x';
 						}
 						break;
@@ -118,14 +124,14 @@ int main(int argc, char *argv[]) {
 					case 'e':
 						// std::cout << "\n";
 						// std::cout << "Ejecutar instruccion\n";
-						ex(sim,pc,ins,p,count);		
+						ex(sim,pc,ins,p,count,m);		
 						op='x';
 						break;
 					
 					case 's':
 						// std::cout << "\n";
 						// std::cout << "Mostrar opcode\n";
-						ins.get_opcode();
+						// ins.get_opcode();
 						p.print();
 						break;
 					
@@ -136,7 +142,7 @@ int main(int argc, char *argv[]) {
 					
 					case 'o':
 						std::cout << "\n";
-						output.print();
+						sim.print_output();
 						break;
 					
 					case 'h':
@@ -155,7 +161,7 @@ int main(int argc, char *argv[]) {
 		}else{
 			pc=0;
 
-			ex(sim,pc,ins,p,count);
+			ex(sim,pc,ins,p,count,m);
 		}
 
 	}else{

@@ -7,7 +7,7 @@
 
 class RAM{
 
-  public:
+  private:
     memory mem_;
     instruction ins_;
     program pr_;
@@ -22,5 +22,11 @@ class RAM{
     void set_i(instruction &i);
     void execute(void);
     int next_inst(void);
+    void print_mem(void);
+    void print_output(void);
+    void print_input(void);
+    void print_labels(void);
+    void print_program(void);
+    void write_file(void);
 
 };

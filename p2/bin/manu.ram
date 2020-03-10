@@ -1,0 +1,22 @@
+read 0
+store 2 
+jgtz normalcase
+jzero zerocase
+jump negativecase
+normalcase: load 2
+store 1 
+load =1
+iteration: load 1
+mul 0
+store 1
+load 2
+div =2
+store 2
+sub =1
+jgtz iteration
+write 1
+halt
+zerocase: write =1
+halt
+negativecase: write =0
+halt

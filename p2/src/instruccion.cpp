@@ -48,7 +48,7 @@ void instruction::set_op(void){
     opcode+= op_;
   }
   
-  if(instruc_ ==" jump" || instruc_ == "JUMP" || 
+  if(instruc_ =="jump" || instruc_ == "JUMP" || 
     instruc_ == "jzero" || instruc_ == "JZERO" ||
     instruc_ == "jgtz" || instruc_ == "JGTZ"){
       jump = true;
@@ -159,7 +159,7 @@ void instruction::desc(void){
   }else if(instruc_ == "jgtz" || instruc_ == "JGTZ"){
     std::cout << "Si acc > 0 saltar a " << op_;
   }else{
-    std::string  e= "Instruccion no existe";
+    std::string  e= "Instruccion no existe tu madre";
     throw e;    
   }
 }

@@ -27,8 +27,6 @@ std::pair<problem *, problem *> mergesortP::decompose(void){
   std::pair<problem*,problem*> subP;
   std::vector<int> aux;
 
-    // std::cout << v_.size() / 2 << "\n";
-
   for(int i=0; i<(v_.size() / 2); i++){
     aux.push_back(v_[i]);
   }

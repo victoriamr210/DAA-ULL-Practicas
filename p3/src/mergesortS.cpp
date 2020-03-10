@@ -6,7 +6,13 @@ mergesortS::~mergesortS(){}
 void mergesortS::solve_s(void){
 
     for(int i=0; i<v_.size(); i++){
-      std::cout << v_[i] << " ";
+      if(i!=0){
+        if(v_[i-1] <= v_[i]){
+          std::cout << v_[i] << " ";
+        }
+      } else {
+        std::cout << v_[i] << " ";
+      }
     }
     std::cout << "\n";
 

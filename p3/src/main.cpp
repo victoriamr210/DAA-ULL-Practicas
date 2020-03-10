@@ -19,8 +19,8 @@ void fill(std::vector<int> &v, int size){
 int main(int argc, char *argv[]) {
 
 	std::vector<int> v;
-	fill(v,10);
-
+	int size(atoi(argv[1]));
+	fill(v,size);
 	for(int i=0; i< v.size(); i++){
 		std::cout << v[i] << " ";
 	}

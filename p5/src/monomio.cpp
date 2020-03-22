@@ -33,7 +33,6 @@ std::ostream &operator<<(std::ostream &sout, const monomio &s){
   return sout;
 }
 
-
 std::istream &operator>>(std::istream &sin, monomio &r){
   int coef, exp;
   sin >> coef >> exp;
@@ -47,9 +46,14 @@ monomio operator+(const monomio &x, const monomio &y){
     int coef = x.get_coef() + y.get_coef();
     monomio m(coef, y.get_exp());
     return m;
-  } else {
-    std::string e = "No se puede sumar, distintos exponentes\n";
-    throw e;
+  }
+}
+
+monomio operator-(const monomio &x, const monomio &y){
+  if(x.get_exp() == y.get_exp()){
+    int coef = x.get_coef() - y.get_coef();
+    monomio m(coef, y.get_exp());
+    return m;
   }
 }
 

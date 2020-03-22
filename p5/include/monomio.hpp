@@ -20,4 +20,5 @@ std::ostream& operator<<(std::ostream &sout, const monomio &s);
 std::istream& operator>>(std::istream &sin, monomio &r);
 
 monomio operator+(const monomio &x, const monomio &y);
+monomio operator-(const monomio &x, const monomio &y);
 monomio operator*(const monomio &x, const monomio &y);

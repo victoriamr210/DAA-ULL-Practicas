@@ -6,7 +6,7 @@ ODIR=../src
 
 LIBS=-lm
 
-_OBJ = main.o calendarPT.o 
+_OBJ = main.o calendarPT.o calendar.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: main
@@ -15,6 +15,9 @@ $(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/calendarPT.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/calendarPT.o: $(ODIR)/calendarPT.cpp $(IDIR)/calendarPT.hpp 
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/calendar.o: $(ODIR)/calendar.cpp $(IDIR)/calendar.hpp 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)

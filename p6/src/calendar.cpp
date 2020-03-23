@@ -1,8 +1,10 @@
-#include "../include/calendarPT.hpp"
+#include "../include/calendar.hpp"
+#include <iomanip>
 
-calendarPT::calendarPT(int n, int m) {
+calendar::calendar(int n, int m, int t) {
   row_ = n;
   col_ = m;
+  teams_ = t;
   board_ = new int*[row_];
   for(int i=0; i<row_; i++){
     board_[i] = new int[col_];
@@ -12,17 +14,25 @@ calendarPT::calendarPT(int n, int m) {
   }
 }
 
-void calendarPT::makeCalendar(void){
+void calendar::makeCalendar(void){
   buildCalendar(0, col_);
 }
 
 
-void calendarPT::buildCalendar(int inf, int sup){
+void calendar::buildCalendar(int inf, int sup){
   int half;
   // sup=sup-1;
   if(inf == (sup-1)){
-    board_[inf][0] = sup+1; 
-    board_[sup][0] = inf+1;
+    if(sup+1 > teams_) 
+      board_[inf][0] = -1;
+    else 
+      board_[inf][0] = sup+1;
+    
+    if(inf+1 > teams_) 
+      board_[sup][0] = -1;
+    else
+      board_[sup][0] = inf + 1;
+    
   } else {
     half = (inf+sup)/2;
     buildCalendar(inf, half);
@@ -35,14 +45,18 @@ void calendarPT::buildCalendar(int inf, int sup){
   }
 }
 
-void calendarPT::fillBoard(int inf, int sup, int infd, int supd, int ini){
+void calendar::fillBoard(int inf, int sup, int infd, int supd, int ini){
   // std::cout << "FB -> inf:" << inf << " sup:" << sup << " infd:" << infd;
   // std::cout << " supd:" << supd << " ini:" << ini << "\n";
   // std::cout << "antes\n";
   // std::cout << "primer for, empieza en " << infd << " termina en " << supd << "\n";
 
   for(int j=infd; j<=supd; j++){
-    board_[inf][j]=ini+j-infd+1;
+    if ((ini+j-infd+1) > teams_){
+      board_[inf][j] = -1;
+    } else {
+      board_[inf][j] = ini + j - infd + 1;
+    }
     // std::cout << "board:" << inf << " " << j;
     // std::cout << " = " << ini+j-infd+1 << " ("<<ini<<"+"<<j<<"-"<<infd<<"+1)\n";
   }
@@ -65,16 +79,16 @@ void calendarPT::fillBoard(int inf, int sup, int infd, int supd, int ini){
 }
 
 
-void calendarPT::write(void){
+void calendar::write(void){
   std::cout << "   ";
   for(int i=0; i<col_; i++){
-    std::cout << i << " ";
+    std::cout << std::setw(3) << i+1 << " ";
   }
   std::cout <<"\n";
-  for(int i=0; i<row_; i++){
-    std::cout << i << "  ";
+  for(int i=0; i<teams_; i++){
+    std::cout << i+1 << "  ";
     for(int j=0; j<col_; j++){
-      std::cout << board_[i][j] << " ";
+      std::cout << std::setw(3) <<board_[i][j] << " ";
     }
     std::cout << "\n";
   }

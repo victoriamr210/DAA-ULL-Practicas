@@ -15,5 +15,8 @@ class table{
     int pos(int i, int j);
     void build_empty(void);
     void write(void);
+    void fill_table(void);
+    int LCS(int i, int j);
+    void solution(void);
 
 };

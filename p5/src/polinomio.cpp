@@ -139,7 +139,6 @@ polinomio operator*(polinomio &p, int cte){
     aux.set_coef(p.get_element(i).get_coef());
     aux.set_exp(exp);  
     p.set_element(aux, i);
-    // std::cout<< "why: " << p.get_element(i) << " fin \n";
   }
   return p;
 }

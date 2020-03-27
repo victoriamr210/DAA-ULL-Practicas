@@ -32,7 +32,7 @@ class tradicional : public algoritmo{
       v.push_back(aux);
     }
     polinomio pol(v);
-    // std::cout << pol ;
+    std::cout << "Resultaodo: " << pol ;
     // return pol;
   }
 };
@@ -40,7 +40,7 @@ class tradicional : public algoritmo{
 class DyV : public algoritmo{
   void multiplicar(polinomio &p, polinomio &q){
     polinomio resultado = multiplicar_r(p,q);
-    // std::cout << "\nResultado final: " << resultado;
+    std::cout << "\nResultado final: " << resultado;
   }
 
   polinomio multiplicar_r(polinomio &fp, polinomio &sp){

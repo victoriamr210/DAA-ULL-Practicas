@@ -27,14 +27,14 @@ int main(int argc, char* argv[]) {
 
   build_pol(v, size);
   polinomio p1(v);
-  // std::cout << p1;
+  std::cout << "polinomio 1: " << p1;
 
 
   v.clear();
   
   build_pol(v,size);
   polinomio p2(v);
-  // std::cout << p2;
+  std::cout << "Polinomio 2: "<< p2;
 
   producto *t;
   producto *dyv;
@@ -54,6 +54,7 @@ int main(int argc, char* argv[]) {
   dyv->operar_m(p1, p2);
   auto t4 = std::chrono::high_resolution_clock::now();
   auto total2 = std::chrono::duration_cast<std::chrono::milliseconds>(t4 - t3).count();
+
 
   std::cout << total2 << "ms Algoritmo DyV\n";
 }

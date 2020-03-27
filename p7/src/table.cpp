@@ -7,6 +7,8 @@ table::table(std::string top, std::string sub){
   subString_ = sub;
   row = subString_.size() + 1;
   col = topString_.size() + 1;
+  std::cout << "Primera cadena: " << topString_ << "\n";
+  std::cout << "Segunda cadena: " << subString_ << "\n\n";
   v_.resize(row*col);
   build_empty();
   fill_table();
@@ -50,20 +52,17 @@ int table::LCS(int i, int j){
   }
 }
 
-void table::solution(void){
+std::string table::solution(void){
   std::string sol = "";
   int i = row-1;
   int j = col-1;
   int aux=-1;
   while((i>=0) && (j>=0)){
-    std::cout << i << " " << j << "\n";
     aux=v_[pos(i,j)];
     if(aux == 0){
       break;
     }
-    std::cout << "aux:" << aux << "\n";
     if((v_[pos(i-1,j)]) == aux-1 && (v_[pos(i,j-1)] == aux-1)){
-      std::cout<< "entra" << subString_[i-1] << "\n";
       sol = subString_[i-1] + sol;
       i--;
       j--;
@@ -78,7 +77,8 @@ void table::solution(void){
       }
     } 
   }
-  std::cout << sol << " " << sol.size() << "\n";
+  return sol;
+  // std::cout << sol << " " << sol.size() << "\n";
 }
 
 void table::write(void){

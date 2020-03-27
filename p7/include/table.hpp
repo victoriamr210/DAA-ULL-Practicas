@@ -17,6 +17,6 @@ class table{
     void write(void);
     void fill_table(void);
     int LCS(int i, int j);
-    void solution(void);
+    std::string solution(void);
 
 };

@@ -12,7 +12,13 @@ int main(int argc, char* argv[]) {
     table t(a, b);
     // t.fill_table();
     t.write();
-    std::cout << "\nLa Subsecuencia Común mas Larga es " << t.solution() << "\n";
+    std::string solucion = t.solution();
+    if(solucion.empty()){
+      std::cout << "No hay subcadena común\n";
+    } else {
+      std::cout << "\nLa Subsecuencia Común mas Larga es: " << solucion << 
+        " con longitud: " << solucion.size() << "\n";
+    }
   } else {
     std::cout << "Numero de parámetros incorrecto\n";
   }

@@ -53,7 +53,7 @@ int table::LCS(int i, int j){
 }
 
 std::string table::solution(void){
-  std::string sol = "";
+  std::string sol;
   int i = row-1;
   int j = col-1;
   int aux=-1;

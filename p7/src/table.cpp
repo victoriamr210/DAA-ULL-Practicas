@@ -45,9 +45,9 @@ int table::LCS(int i, int j){
     // std::cout << subString_[i-1] << " " << topString_[j-1] << "\n";
     if(subString_[i-1] == topString_[j-1]){
   // std::cout << "hola\n";
-      return 1 + LCS(i-1, j-1);
+      return 1 + v_[pos(i-1, j-1)];
     } else {
-      return std::max(LCS(i-1,j), LCS(i,j-1));
+      return std::max(v_[pos(i-1,j)], v_[pos(i,j-1)]);
     }
   }
 }
@@ -68,11 +68,15 @@ std::string table::solution(void){
       j--;
     } else{
     // std::cout << "i-1:" << v_[pos(i-1,j)] << " j-1:" << v_[pos(i,j-1)] << "\n";
-      if ((v_[pos(i,j-1)]) == aux-1 && (v_[pos(i-1,j)] == aux-1)){
+      if ((v_[pos(i,j-1)]) == aux && (v_[pos(i-1,j)] == aux)){
         i--;
       } else {
         if ((v_[pos(i,j-1)]) == aux && (v_[pos(i-1,j)] < aux)){
           j--;
+        } else {
+          if((v_[pos(i,j-1)] == aux-1) && (v_[pos(i-1,j)]) == aux) {
+            i--;
+          }
         }
       }
     } 

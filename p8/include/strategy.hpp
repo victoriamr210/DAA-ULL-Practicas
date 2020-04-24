@@ -1,14 +1,12 @@
+#pragma once
 #include "graph.hpp"
+#include <set>
 
 class algoritmo{
   public:
     virtual void solve(graph &g)=0;
 };
 
-
-class voraz : public algoritmo{
-  void solve(graph &g);
-};
 
 class new_voraz : public algoritmo{
   void solve(graph &g);

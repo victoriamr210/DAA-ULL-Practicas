@@ -8,13 +8,13 @@ class algoritmo{
 };
 
 
-class new_voraz : public algoritmo{
-  void solve(graph &g);
-};
+// class new_voraz : public algoritmo{
+//   void solve(graph &g);
+// };
 
-class GRASP : public algoritmo{
-  void solve(graph &g);
-};
+// class GRASP : public algoritmo{
+//   void solve(graph &g);
+// };
 
 class multiarranque : public algoritmo{
   void solve(graph &g);

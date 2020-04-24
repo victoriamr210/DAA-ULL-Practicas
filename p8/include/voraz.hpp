@@ -5,14 +5,10 @@
 
 /*Clase que implementa el algoritmo constructivo voraz*/
 class voraz : public algoritmo{
-  /**
-   * @desc vector de nodos incluidos en la solucion
-   **/
+  /*Funcion que inica la ejecucion*/
   std::vector<solution> solutions_;
   void solve(graph &g) {
-    // for (int i = 0; i < 20; i++) {
-    //   solutions_.push_back(execute(g));
-    // }
+ 
     solution a = execute(g);
     a.write();
 
@@ -21,76 +17,54 @@ class voraz : public algoritmo{
   /* Funcion principal que implementa el algortimo voraz*/
   solution execute(graph &g){
 
-    std::vector<int> s;
-    std::pair<int,int> p = g.maximum();
-    // pairs_.push_back(std::make_pair(p.first, p.second));
+    std::vector<int> s; //conjunto de nodos de la solucion
+    std::pair<int,int> p = g.maximum(); //hallamos nodos que contiene la arista de mayor afinidad
     s.push_back(p.first);
     s.push_back(p.second);
-    int cont = 0;
     float mean = g.get_item(p.first, p.second) / 2;
-    //  for (int i = 0; i < s.size(); i++) {
-      // std::cout << "i:" << s[i] << " ";
-    // }
-    // std::cout << "solve mean: " << mean << "\n";
-    std::vector<int> s_prima;
-    while(s_prima.size() != s.size() /*&& cont < g.get_nodes()*/) {
-      // std::cout << "hello\n";
-      // std::cout << "1:" << s.size() << " 2:" << s_prima.size() << "\n";
+    std::vector<int> s_prima; //conjunto auxiliar
+    while(s_prima.size() != s.size() ) { //mientras el conjunto cambie
       s_prima = s;
-      int node = find_k(s, g, mean); 
-      if (node == -1) {
+      int node = find_k(s, g, mean); //buscamos un vertice k que maximize la media
+      if (node == -1) { //si el nodo es -1 sigfinca no se hay encontrado ningun vertice
         break;
       } else {
-        s.push_back(node);
+        s.push_back(node); //guardamos el nodo en la solución
       }
-      cont++;
-      
     }
-    std::cout << "final:" << mean << "\n";
-    return solution(s, mean);
-    // g.set_sol(s, mean);
+    // std::cout << "final:" << mean << "\n";
+    return solution(s, mean); //generamos la solucion
 
   }
 
-  /* Funcion que encuentra un vertica k que maximize la media de dispersión*/
+  /* Funcion que encuentra un vertice k que maximize la media de dispersión*/
   int find_k(std::vector<int> &s, graph &g, float &mean) {
     int node = -1;
-    float aux_mean = mean;
+    float aux_mean = mean; //guardamos la media consiguida hasta ahora
     float aux_mean2;
-    // std::cout << "\n\ninical:" << mean << "\n";
-    // for (int i = 0; i < s.size(); i++) {
-    //   std::cout << "i:" << s[i] << " ";
-    // }
-    // std::cout << "\n";
-    // for (int i = 0; i < s.size(); i++) {
+    std::vector<int> v;
       for (int j = 0;  j < g.get_nodes(); j++){
         
-            // std::cout << "j: " << j << "\n";
-        if (valid(s,j)) {
+        if (valid(s,j)) { //comprobamos si el nodo j no se encuentra en la solución
           std::vector<int> aux = s;
-          aux.push_back(j);
-          // std::cout << "array: ";
-          // for (int k = 0; k < aux.size(); k++){
-            // std::cout << aux[k] << " ";
-          // }
-          // std::cout << "\n";
-          aux_mean2 = getMd(aux, g);
-          // aux_mean2 = get_mean(mean, s.size(), g.get_item(i,j));
-            // std::cout << "aux:" << aux_mean2 <<  " mean:" << aux_mean << "\n";
-          if (aux_mean2 >= aux_mean) {
+          aux.push_back(j); //guardamos el nodo en nuestra solucion a evaluar
+          aux_mean2 = getMd(aux, g); //calculamos la media de nuestra solucion auxiliar
+           if (aux_mean2 > aux_mean) {  //actualizamos la media en caso de se mayor
             node = j;
+            v.clear();
+            v.push_back(j);
             aux_mean = aux_mean2;
+          } else if(aux_mean2 == aux_mean){ //si encontramos un nodo que genere una media igual a 
+              v.push_back(j);               //la guardamos en un vector
           }
-          // if ((mean + (g.get_item(i,j) / (s.size() +1))) >= aux_mean) {
-            // aux_mean = mean + (g.get_item(i,j) / (s.size()+1));
-          // }
         }
       }
-    // }
-      // std::cout << "node: " <<  node << "\n";
-    if(aux_mean >= mean) {
+    if(aux_mean >= mean) {  //actualizamos la media global
       mean = aux_mean;
-      return node;
+      if(v.size() > 1){
+        return v[rand() % v.size()]; //en caso de que hayan varios nodos que den la misma media, elegimos uno al azar
+      }
+      return node; //retornamos el nodo que maximiza la media
     } else {
       return -1;
     }
@@ -101,8 +75,6 @@ class voraz : public algoritmo{
     float sum;
     for(int i = 0; i < s.size(); i++){
       for(int j = i + 1; j < s.size(); j++){
-        // std::cout << "i:" << i << " j:" << j << " ";
-        // std::cout << g.get_item(i,j) << "\n";
         sum += g.get_item(s[i],s[j]);
 
       }
@@ -119,9 +91,5 @@ class voraz : public algoritmo{
       }
     }
     return true;
-  }
-
-  float get_mean(float aux_mean, int size, float next) {
-    return (aux_mean * size + next) / (size + 1);
   }
 };

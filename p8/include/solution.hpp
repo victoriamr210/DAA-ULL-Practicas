@@ -9,13 +9,12 @@ class solution {
   public:
     solution(){}
     solution(std::vector<int> s, float mean) {
-      std::cout << "lo que llega:" << mean << "\n";
       sol_ = s;
       mean_ = mean;
     }
 
     void write(void) {
-      std::cout << "camino:\n";
+      std::cout << "conjunto: ";
       for(int i = 0; i < sol_.size(); i++){
         std::cout << sol_[i] << " ";
       }

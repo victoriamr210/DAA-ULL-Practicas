@@ -6,6 +6,7 @@
 #include "../include/solution.hpp"
 #include "../include/grasp.hpp"
 #include "../include/multiarranque.hpp"
+#include "../include/vns.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -17,14 +18,17 @@ int main(int argc, char* argv[]) {
     std::cout << "-------Voraz------\n";
     resolve *v = new resolve(new voraz());
     v->get_solution(g);
-    // std::cout << "-------Nuevo Voraz------\n";
-    // v->set_a(new new_voraz());
-    // v->get_solution(g);
-    // std::cout << "-------GRASP------\n";
-    // v->set_a(new GRASP());
-    // v->get_solution(g);
-    // std::cout << "-------Multiarranque------\n";
-    // v->set_a(new multiarranque());
+    std::cout << "-------Nuevo Voraz------\n";
+    v->set_a(new new_voraz());
+    v->get_solution(g);
+    std::cout << "-------GRASP------\n";
+    v->set_a(new GRASP());
+    v->get_solution(g);
+    std::cout << "-------Multiarranque------\n";
+    v->set_a(new multiarranque());
+    v->get_solution(g);
+    std::cout << "-------VNS------\n";
+    v->set_a(new VNS());
     v->get_solution(g);
   }
 }

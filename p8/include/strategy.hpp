@@ -8,23 +8,6 @@ class algoritmo{
 };
 
 
-// class new_voraz : public algoritmo{
-//   void solve(graph &g);
-// };
-
-// class GRASP : public algoritmo{
-//   void solve(graph &g);
-// };
-
-class multiarranque : public algoritmo{
-  void solve(graph &g);
-};
-
-class busqueda_entorno : public algoritmo{
-  void solve(graph &g);
-};
-
-
 class resolve{
   protected:
     algoritmo *a_;

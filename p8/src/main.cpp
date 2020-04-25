@@ -13,13 +13,15 @@ int main(int argc, char* argv[]) {
   } else {
     graph g(argv[1]);
     // g.write();
-
-    resolve *v = new resolve(new new_voraz());
-    // v->get_solution(g);
-    // v = new resolve(new GRASP());
+    std::cout << "-------Voraz------\n";
+    resolve *v = new resolve(new voraz());
     v->get_solution(g);
-
-    // g.write_sol();
+    std::cout << "-------Nuevo Voraz------\n";
+    v->set_a(new new_voraz());
+    v->get_solution(g);
+    std::cout << "-------GRASP------\n";
+    v->set_a(new GRASP());
+    v->get_solution(g);
 
   }
 }

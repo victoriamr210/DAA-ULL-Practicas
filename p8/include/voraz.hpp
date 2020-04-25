@@ -2,19 +2,34 @@
 #include "graph.hpp"
 #include "strategy.hpp"
 #include "solution.hpp"
+#include <chrono>
 
-/*Clase que implementa el algoritmo constructivo voraz*/
+/**/
+/**
+ * @brief Clase que implementa el algoritmo constructivo voraz
+ * 
+ */
 class voraz : public algoritmo{
-  /*Funcion que inica la ejecucion*/
-  std::vector<solution> solutions_;
+  /**
+   * @brief Funcion principal, inicia la ejecucion
+   * 
+   * @param g matriz de distancias
+   */
   void solve(graph &g) {
- 
+    auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute(g);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+    a.set_time(duration);
     a.write();
-
   }
 
-  /* Funcion principal que implementa el algortimo voraz*/
+  /**
+   * @brief Funcion principal que implementa el algortimo voraz
+   * 
+   * @param g matriz de distancias
+   * @return solution 
+   */
   solution execute(graph &g){
 
     std::vector<int> s; //conjunto de nodos de la solucion
@@ -23,10 +38,10 @@ class voraz : public algoritmo{
     s.push_back(p.second);
     float mean = g.get_item(p.first, p.second) / 2;
     std::vector<int> s_prima; //conjunto auxiliar
-    while(s_prima.size() != s.size() ) { //mientras el conjunto cambie
+    while(s_prima.size() != s.size() ) {
       s_prima = s;
       int node = find_k(s, g, mean); //buscamos un vertice k que maximize la media
-      if (node == -1) { //si el nodo es -1 sigfinca no se hay encontrado ningun vertice
+      if (node == -1) { 
         break;
       } else {
         s.push_back(node); //guardamos el nodo en la solución
@@ -37,7 +52,14 @@ class voraz : public algoritmo{
 
   }
 
-  /* Funcion que encuentra un vertice k que maximize la media de dispersión*/
+  /**
+   * @brief Funcion que encuentra un vertice k que maximize la media de dispersión
+   * 
+   * @param s vector de nodos
+   * @param g matriz de distancias
+   * @param mean media global
+   * @return int 
+   */
   int find_k(std::vector<int> &s, graph &g, float &mean) {
     int node = -1;
     float aux_mean = mean; //guardamos la media consiguida hasta ahora
@@ -64,13 +86,20 @@ class voraz : public algoritmo{
       if(v.size() > 1){
         return v[rand() % v.size()]; //en caso de que hayan varios nodos que den la misma media, elegimos uno al azar
       }
-      return node; //retornamos el nodo que maximiza la media
+      return node; 
     } else {
       return -1;
     }
   }
 
-  /* Funcion que calcula la media de dispersión de un conjunto de nodos*/
+  /* */
+  /**
+   * @brief Funcion que calcula la media de dispersión de un conjunto de nodos
+   * 
+   * @param s vector
+   * @param g matriz de distancias
+   * @return float 
+   */
   float getMd(std::vector<int> s, graph &g) {
     float sum;
     for(int i = 0; i < s.size(); i++){
@@ -84,9 +113,17 @@ class voraz : public algoritmo{
   }
 
   /*Funcion que comprueba si el nodo candidato existe en la solución o no*/
-  bool valid(std::vector<int> &s, int j) {
+  /**
+   * @brief Funcion que comprueba si el nodo candidato existe en la solución o no
+   * 
+   * @param s vector de nodos
+   * @param num elemento a comprobar 
+   * @return true 
+   * @return false 
+   */
+  bool valid(std::vector<int> &s, int num) {
     for(int k = 0; k < s.size(); k++){
-      if(s[k] == j){
+      if(s[k] == num){
         return false;
       }
     }

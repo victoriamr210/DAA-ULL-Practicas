@@ -4,29 +4,55 @@
 #include "solution.hpp"
 #include <algorithm>
 
-/*Clase que implementa el algoritmo constructivo voraz mejorado*/
+/**
+ * @brief Clase que implementa el algoritmo constructivo voraz mejorado
+ * 
+ */
 class new_voraz : public algoritmo{
-  std::vector<solution> solutions_;
+  /**
+   * @brief Funcion principal, inicia la ejecucion
+   * 
+   * @param g matriz de distancias
+   */
   void solve(graph &g) {
-    // for (int i = 0; i < 20; i++) {
-    //   solutions_.push_back(execute(g));
-    // }
+    auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute(g);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+    a.set_time(duration);
     a.write();
 
   }
-  /*Funcion que crea un vector con todos los nodos existentes*/
+
+  /**
+   * @brief Funcion que crea un vector con todos los nodos existentes
+   * 
+   * @param s vector
+   * @param size tamaño del vector
+   */
   void build_list(std::vector<int> &s, int size){
     s.resize(size);
     for(int i = 0; i < size; i++){
       s[i] = i;
     }
   }
-  /*Funcion que elimina un elemento del vector*/
+
+  /**
+   * @brief Funcion que elimina un elemento del vector
+   * 
+   * @param s vector
+   * @param num elemento a eliminar
+   */
   void delete_item(std::vector<int> &s, int num){
     s.erase(std::find(s.begin(), s.end(), num));
   }
-  /* Funcion principal que implementa el algortimo voraz*/
+
+  /**
+   * @brief Funcion principal que implementa el algortimo voraz
+   * 
+   * @param g matriz de distancias
+   * @return solution 
+   */
   solution execute(graph &g){
 
     std::vector<int> s;
@@ -51,8 +77,17 @@ class new_voraz : public algoritmo{
 
   }
 
-  /* Funcion que encuentra un vertica k que maximize la media de dispersión
+  /* Funcion que encuentra un vertice k que maximize la media de dispersión
   para quitarlo del conjunto*/
+  /**
+   * @brief Funcion que encuentra un vertice k que maximize la media de dispersión
+   * para quitarlo del conjunto
+   * 
+   * @param s vector de nodos
+   * @param g matriz de distancias
+   * @param mean media global
+   * @return int 
+   */
   int find_k(std::vector<int> &s, graph &g, float &mean) {
     int node = -1;
     float aux_mean = mean; //media auxliar para comparar
@@ -72,7 +107,6 @@ class new_voraz : public algoritmo{
       }
       // std::cout << "\nnode:" << node << " final:" << aux_mean << "\n\n";
 
-      //retornar el nodo que maximiza la media
       if(v.size() > 1){ 
         int index = rand() % v.size();
         return v[index];
@@ -80,7 +114,13 @@ class new_voraz : public algoritmo{
       return node;
   }
 
-  /* Funcion que calcula la media de dispersión de un conjunto de nodos*/
+  /**
+   * @brief Funcion que calcula la media de dispersión de un conjunto de nodos
+   * 
+   * @param s vector de nodos
+   * @param g matriz de distancias
+   * @return float 
+   */
   float getMd(std::vector<int> s, graph &g) {
     float sum;
     for(int i = 0; i < s.size(); i++){
@@ -92,7 +132,13 @@ class new_voraz : public algoritmo{
     return sum / s.size();
   }
 
-  /*Funcion que crea un vector sin el elemento que se le manda*/
+  /**
+   * @brief Funcion que crea un vector sin el elemento que se le manda
+   * 
+   * @param s vector de nodos
+   * @param num numero a ignorar
+   * @return std::vector<int> 
+   */
   std::vector<int> build_check(std::vector<int> s, int num){
     std::vector<int> aux;
     for(int i = 0; i < s.size(); i++){
@@ -103,16 +149,29 @@ class new_voraz : public algoritmo{
     return aux;
   }
 
-  /*Funcion que comprueba si el nodo candidato existe en la solución o no*/
-  bool valid(std::vector<int> &s, int j) {
+  /**/
+  /**
+   * @brief Funcion que comprueba si el nodo candidato existe en la solución o no
+   * 
+   * @param s vector de nodos
+   * @param num numero a comprobar
+   * @return true 
+   * @return false 
+   */
+  bool valid(std::vector<int> &s, int num) {
     for(int k = 0; k < s.size(); k++){
-      if(s[k] == j){
+      if(s[k] == num){
         return true;
       }
     }
     return false;
   }
-  /*Funcion que escribe un vector*/
+
+  /**
+   * @brief Funcion que escirbe un vector
+   * 
+   * @param s vector
+   */
   void write(std::vector<int> s){
     for(int i = 0; i < s.size(); i++){
       std::cout << s[i] << " ";

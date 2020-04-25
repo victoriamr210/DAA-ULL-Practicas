@@ -18,16 +18,16 @@ int main(int argc, char* argv[]) {
     std::cout << "-------Voraz------\n";
     resolve *v = new resolve(new voraz());
     v->get_solution(g);
-    std::cout << "-------Nuevo Voraz------\n";
+    std::cout << "\n-------Nuevo Voraz------\n";
     v->set_a(new new_voraz());
     v->get_solution(g);
-    std::cout << "-------GRASP------\n";
+    std::cout << "\n-------GRASP------\n";
     v->set_a(new GRASP());
     v->get_solution(g);
-    std::cout << "-------Multiarranque------\n";
+    std::cout << "\n-------Multiarranque------\n";
     v->set_a(new multiarranque());
     v->get_solution(g);
-    std::cout << "-------VNS------\n";
+    std::cout << "\n-------VNS------\n";
     v->set_a(new VNS());
     v->get_solution(g);
   }

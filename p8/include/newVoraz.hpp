@@ -14,7 +14,7 @@ class new_voraz : public algoritmo{
    * 
    * @param g matriz de distancias
    */
-  void solve(graph &g) {
+  void solve(graph &g, bool greedy) {
     auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute(g);
     auto t2 = std::chrono::high_resolution_clock::now();

@@ -1,0 +1,122 @@
+before
+10
+-------Voraz------
+Conjunto: 9 1 8 7 6 5 4 
+Media: 11.8571
+Tiempo de ejecucion: 44 microsegundos
+
+-------Nuevo Voraz------
+Conjunto: 4 5 6 7 8 9 
+Media: 14
+Tiempo de ejecucion: 80 microsegundos
+
+-------GRASP------
+Conjunto: 7 8 6 5 4 9 
+Media: 14
+Tiempo de ejecucion: 3524 microsegundos
+
+-------Multiarranque------
+Conjunto: 8 4 6 5 7 9 
+Media: 14
+Tiempo de ejecucion: 1166 microsegundos
+
+-------VNS------
+Conjunto: 2 5 8 0 1 4 6 7 3 
+Media: 11
+Tiempo de ejecucion: 2419 microsegundos
+-------Voraz------
+Conjunto: 9 1 8 7 6 5 4 
+Media: 11.8571
+Tiempo de ejecucion: 36 microsegundos
+
+-------Nuevo Voraz------
+Conjunto: 4 5 6 7 8 9 
+Media: 14
+Tiempo de ejecucion: 78 microsegundos
+
+-------GRASP------
+Conjunto: 7 8 6 5 4 9 
+Media: 14
+Tiempo de ejecucion: 3797 microsegundos
+
+-------Multiarranque------
+Conjunto: 8 4 6 5 7 9 
+Media: 14
+Tiempo de ejecucion: 1066 microsegundos
+
+-------VNS------
+Conjunto: 2 5 8 0 1 4 6 7 3 
+Media: 11
+Tiempo de ejecucion: 2408 microsegundos
+-------Voraz------
+Conjunto: 9 1 8 7 6 5 4 
+Media: 11.8571
+Tiempo de ejecucion: 36 microsegundos
+
+-------Nuevo Voraz------
+Conjunto: 4 5 6 7 8 9 
+Media: 14
+Tiempo de ejecucion: 78 microsegundos
+
+-------GRASP------
+Conjunto: 7 8 6 5 4 9 
+Media: 14
+Tiempo de ejecucion: 3659 microsegundos
+
+-------Multiarranque------
+Conjunto: 8 4 6 5 7 9 
+Media: 14
+Tiempo de ejecucion: 1067 microsegundos
+
+-------VNS------
+Conjunto: 2 5 8 0 1 4 6 7 3 
+Media: 11
+Tiempo de ejecucion: 2407 microsegundos
+-------Voraz------
+Conjunto: 9 1 8 7 6 5 4 
+Media: 11.8571
+Tiempo de ejecucion: 36 microsegundos
+
+-------Nuevo Voraz------
+Conjunto: 4 5 6 7 8 9 
+Media: 14
+Tiempo de ejecucion: 78 microsegundos
+
+-------GRASP------
+Conjunto: 7 8 6 5 4 9 
+Media: 14
+Tiempo de ejecucion: 3594 microsegundos
+
+-------Multiarranque------
+Conjunto: 8 4 6 5 7 9 
+Media: 14
+Tiempo de ejecucion: 1162 microsegundos
+
+-------VNS------
+Conjunto: 2 5 8 0 1 4 6 7 3 
+Media: 11
+Tiempo de ejecucion: 2405 microsegundos
+-------Voraz------
+Conjunto: 9 1 8 7 6 5 4 
+Media: 11.8571
+Tiempo de ejecucion: 35 microsegundos
+
+-------Nuevo Voraz------
+Conjunto: 4 5 6 7 8 9 
+Media: 14
+Tiempo de ejecucion: 78 microsegundos
+
+-------GRASP------
+Conjunto: 7 8 6 5 4 9 
+Media: 14
+Tiempo de ejecucion: 3515 microsegundos
+
+-------Multiarranque------
+Conjunto: 8 4 6 5 7 9 
+Media: 14
+Tiempo de ejecucion: 1065 microsegundos
+
+-------VNS------
+Conjunto: 2 5 8 0 1 4 6 7 3 
+Media: 11
+Tiempo de ejecucion: 2519 microsegundos

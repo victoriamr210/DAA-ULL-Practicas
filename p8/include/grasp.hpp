@@ -22,6 +22,8 @@ class GRASP : public algoritmo{
   const int IMPROVEMENT = 50;
   /*Matriz de distancias*/
   graph grafo;
+  /*Booleano para indicar si se quiere busqueda greedy o no*/
+  bool greedy_;
   /**
    * @brief Setter de la matriz de distancias
    * 
@@ -37,9 +39,10 @@ class GRASP : public algoritmo{
    * 
    * @param g grafo
    */
-  void solve(graph &g){
+  void solve(graph &g, bool greedy){
     srand(time(NULL));
     set_graph(g);
+    greedy_ = greedy;
     auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute(g);
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -137,14 +140,11 @@ class GRASP : public algoritmo{
     std::vector<int> cand = get_candidates(s); //generamos los canditatos
     std::vector<int> aux;
     std::vector<float> media; //vector donde se almacenan las media por cada nodo
-    int index;
     float alfa = 0.3;
-    // for(int i = 0; i < RCL_size; i++){
     for(int i = 0; i < cand.size(); i++){
       s.push_back(cand[i]); 
       float mean = getMd(s); //generamos la media de la solucion
       s.pop_back();
-      bool found = false;
 
       int pos = 0;
       for (int j = 0; j < media.size(); j++) {
@@ -220,7 +220,12 @@ class GRASP : public algoritmo{
     bool flag = true;
     while(flag){
       flag = false;
-      int k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      int k;
+      if(greedy_){
+        k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      } else {
+        k =  find_k_anxious(sol); //buscmos un indice k a eliminar que maximice la media
+      }
       std::vector<int> aux;
       if(k != -1){
         flag=true;
@@ -246,6 +251,7 @@ class GRASP : public algoritmo{
       float testValue = getMd(sol); //generamos su media
       sol.insert(sol.begin() + i, vertex);
       if(testValue > current) { //actualizamos la media si es necesario
+      // return i;
         current = testValue; 
         aux.clear();
         aux.push_back(i); 
@@ -257,6 +263,28 @@ class GRASP : public algoritmo{
     int index = rand() %  (aux.size()); //elegimos un nodo aleatorio de los posibles
     //std::cout << index << std::endl;
     return aux[index]; 
+  }
+
+    /**
+   * @brief Funcion que encuentra un nodo k a eliminar que maximice la meida
+   * 
+   * @param sol 
+   * @return int 
+   */
+  int find_k_anxious(std::vector<int> sol) {
+    std::vector<int> aux;
+    aux.push_back(-1);
+    float current = getMd(sol); // generamos la media de la solucion actual
+    for(int i = 0; i < sol.size(); i++) {
+      const int vertex = sol[i];
+      sol.erase(sol.begin() + i); //probamos eliminando un nodo
+      float testValue = getMd(sol); //generamos su media
+      sol.insert(sol.begin() + i, vertex);
+      if(testValue > current) { //actualizamos la media si es necesario
+        return i; 
+      }
+    }
+    return -1;
   }
 
   /**

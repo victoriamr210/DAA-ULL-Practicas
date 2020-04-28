@@ -16,6 +16,8 @@ class multiarranque : public algoritmo{
   const int IMPROVEMENT = 50;
   /*Matriz de distancias*/
   graph grafo;
+
+  bool greedy_;
   /**
    * @brief Setter de la matriz de distancias
    * 
@@ -30,9 +32,10 @@ class multiarranque : public algoritmo{
    * 
    * @param g grafo
    */
-  void solve(graph &g){
+  void solve(graph &g, bool greedy){
     srand(time(NULL));
     set_graph(g);
+    greedy_ = greedy;
     auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute(g);
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -137,7 +140,12 @@ class multiarranque : public algoritmo{
     bool flag = true;
     while(flag){
       flag = false;
-      int k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      int k;
+      if (greedy_){
+        k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      } else {
+        k = find_k_anxious(sol); //buscmos un indice k a eliminar que maximice la media
+      }
       std::vector<int> aux;
       if(k != -1){
         flag=true;
@@ -173,6 +181,29 @@ class multiarranque : public algoritmo{
     int index = rand() % (aux.size()); //elegimos un nodo aleatorio de los posibles
     //std::cout << index << std::endl;
     return aux[index]; 
+  }
+
+  /**
+   * @brief Funcion que busca un nodo k a eliminar que maximice la media
+   * 
+   * @param sol solucion actual
+   * @return int 
+   */
+  int find_k_anxious(std::vector<int> sol) {
+    std::vector<int> aux;
+    aux.push_back(-1);
+    float current = getMd(sol); // generamos la media de la solucion actual
+    for(int i = 0; i < sol.size(); i++) {
+      const int vertex = sol[i];
+      sol.erase(sol.begin() + i); //probamos eliminando un nodo
+      float test = getMd(sol);    //generamos su media
+      sol.insert(sol.begin() + i, vertex);
+      if(test > current) { //actualizamos la media si es necesario
+        return i;
+      } 
+    }
+
+    return -1;
   }
 
   /**

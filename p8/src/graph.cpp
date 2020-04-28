@@ -26,13 +26,12 @@ graph::graph(graph &g){
  * @param file fichero
  */
 void graph::read(char file[]){
-  std::cout << "before\n";
   // write();
   std::fstream f;
   f.open(file);
   if(f.is_open()) {
     f >> nodes_;
-    std::cout << nodes_ << "\n";
+    std::cout << nodes_ << " nodos\n";
     d_.resize(nodes_ * nodes_, INFINITY);
     set_d();
     int i = 0;

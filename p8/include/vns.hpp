@@ -19,6 +19,7 @@ class VNS : public algoritmo{
   const int IMPROVEMENT = 50;
   /*Tamaño maximo del entorno*/
   const int KMAX = 3;
+  bool greedy_;
 
   /**
    * @brief Setter de la matriz de distancias
@@ -35,9 +36,10 @@ class VNS : public algoritmo{
    * 
    * @param g grafo
    */
-  void solve(graph &g){
+  void solve(graph &g, bool greedy){
     srand(time(NULL));
     set_graph(g);
+    greedy_ = greedy;
     auto t1 = std::chrono::high_resolution_clock::now();
     solution a = execute();
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -113,7 +115,12 @@ class VNS : public algoritmo{
     bool flag = true;
     while(flag){
       flag = false;
-      int k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      int k;
+      if(greedy_) {
+        k = find_k(sol); //buscmos un indice k a eliminar que maximice la media
+      } else {
+        k = find_k_anxious(sol); //buscmos un indice k a eliminar que maximice la media
+      }
       std::vector<int> aux;
       if(k != -1){
         flag=true;
@@ -124,7 +131,7 @@ class VNS : public algoritmo{
   }
 
   /**
-   * @brief Funcion que implementa la agitacion, dado un kse crea el tamaño del entorno
+   * @brief Funcion que implementa la agitacion, dado un k se crea el tamaño del entorno
    * 
    * @param cand lista de candidatos
    * @param sol_size tamaño de la solucion
@@ -169,6 +176,28 @@ class VNS : public algoritmo{
     int index = rand() %  (aux.size());
     //std::cout << index << std::endl;
     return aux[index]; 
+  }
+
+   /**
+   * @brief Funcion que busca un nodo k a eliminar que maximice la media
+   * 
+   * @param sol solucion actual
+   * @return int 
+   */
+  int find_k_anxious(std::vector<int> sol) {
+    std::vector<int> aux;
+    aux.push_back(-1);
+    float current = getMd(sol); // generamos la media de la solucion actual
+    for(int i = 0; i < sol.size(); i++) {
+      const int vertex = sol[i]; //probamos eliminando un nodo
+      sol.erase(sol.begin() + i); //generamos su media
+      float test = getMd(sol); 
+      sol.insert(sol.begin() + i, vertex);
+      if(test > current) { //actualizamos la media si es necesario
+        return i;
+      }
+    }
+    return -1;
   }
 
   /* */

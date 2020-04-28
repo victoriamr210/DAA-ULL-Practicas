@@ -14,7 +14,7 @@ class graph {
     /*matriz de disancias implementada como vector*/
     std::vector<float> d_;
     // std::vector<int> sol_;
-    solution sol_;
+    solution sol_;  
     float mean_;
   
   public:

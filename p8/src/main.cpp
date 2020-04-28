@@ -7,6 +7,7 @@
 #include "../include/grasp.hpp"
 #include "../include/multiarranque.hpp"
 #include "../include/vns.hpp"
+#include "../include/grasp_vns.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -36,6 +37,9 @@ int main(int argc, char* argv[]) {
     v->get_solution(g);
     std::cout << "\n-------VNS------\n";
     v->set_a(new VNS());
+    v->get_solution(g);
+    std::cout << "\n-------Hibrido GRASP_VNS------\n";
+    v->set_a(new graspVns());
     v->get_solution(g);
     // }
   }

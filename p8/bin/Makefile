@@ -11,7 +11,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: main
 
-$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/graph.hpp $(IDIR)/strategy.hpp $(IDIR)/voraz.hpp $(IDIR)/solution.hpp $(IDIR)/grasp.hpp $(IDIR)/newVoraz.hpp $(IDIR)/multiarranque.hpp $(IDIR)/vns.hpp
+$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/graph.hpp $(IDIR)/strategy.hpp $(IDIR)/voraz.hpp $(IDIR)/solution.hpp $(IDIR)/grasp.hpp $(IDIR)/newVoraz.hpp $(IDIR)/multiarranque.hpp $(IDIR)/vns.hpp $(IDIR)/grasp_vns.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/graph.o: $(ODIR)/graph.cpp $(IDIR)/graph.hpp 

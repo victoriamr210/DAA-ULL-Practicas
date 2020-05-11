@@ -11,7 +11,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: main
 
-$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/problem.hpp $(IDIR)/voraz.hpp $(IDIR)/solution.hpp $(IDIR)/newVoraz.hpp
+$(ODIR)/main.o: $(ODIR)/main.cpp $(IDIR)/problem.hpp $(IDIR)/voraz.hpp $(IDIR)/solution.hpp $(IDIR)/newVoraz.hpp $(IDIR)/GRASP.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/problem.o: $(ODIR)/problem.cpp $(IDIR)/problem.hpp 

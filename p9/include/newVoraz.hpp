@@ -35,7 +35,7 @@ class newVoraz : public algorithm{
     }
     std::vector<int> s = elem;
     std::vector<float> Sc = p_.center(elem);
-    float distance = 0;
+    // float distance = 0;
 
     while (s.size() != M){
       int sStar = furthest(Sc, elem);
@@ -43,7 +43,8 @@ class newVoraz : public algorithm{
       elem.erase(std::find(elem.begin(), elem.end(), sStar));
       Sc = p_.center(s);
     }
-    return Solution(p_, s);
+    float distance = get_total(s);
+    return Solution(p_, s, distance);
   }
 
 
@@ -56,15 +57,11 @@ class newVoraz : public algorithm{
 
     for (int i = 0; i < elem.size(); i++){
       float aux = 0;
-      // std::cout << "Resta: " << i << "\n";
       for(int j = 0; j < p_.get_dimension(); j++){
-        // std::cout << Sc[j] << " - " << p_.get_item(elem[i], j) << "^2 ="
-        //           << pow(Sc[j] - p_.get_item(elem[i], j), 2)  << "\n";
         aux += pow(Sc[j] - p_.get_item(elem[i], j), 2);
       }
 
       aux = sqrt(aux);
-      // std::cout << "aux:" << aux << " dis:" << distance << "\n";
       if (aux < distance) {
         distance = aux;
         sol = elem[i];
@@ -74,12 +71,21 @@ class newVoraz : public algorithm{
         repeat.push_back(elem[i]);
       }
     }
-    // std::cout << "\nSol: " << sol << "\n";
 
     if (repeat.size() > 1){
       int index = rand() % repeat.size();
       return repeat[index];
     }
     return sol;
+  }
+
+  float get_total(std::vector<int> sol){
+    float aux = 0;
+    for(int i = 0; i < sol.size(); i++) {
+      for(int j = i+1; j < sol.size(); j++) {
+        aux += p_.get_distance(sol[i], sol[j]);
+      }
+    }
+    return aux;
   }
 };

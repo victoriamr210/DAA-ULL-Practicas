@@ -2,6 +2,7 @@
 #include "../include/problem.hpp"
 #include <fstream>
 #include <iomanip>
+#include <math.h>
 
 Problem::Problem(char file []){
   read(file);
@@ -67,20 +68,24 @@ void Problem::write(void ){
 
 std::vector<float> Problem::center(std::vector<int> s){
   std::vector<float> aux(k_);
-  // std::cout << "centro de " << s.size() << " elementos\n";
-    for(int j = 0; j < k_; j++){
-    // std::cout << "\nSuma " << j << "\n";
-  for(int i = 0; i < s.size(); i++){
-      // std::cout << get_item(s[i], j) << " ";
+  for(int j = 0; j < k_; j++){
+    for(int i = 0; i < s.size(); i++){
       aux[j] += get_item(s[i], j);
     }
-    // std::cout << " = " << aux[j];
   }
-  // std::cout <<"\n\n";
+
   for(int i = 0; i < k_; i++){
-    // std::cout << aux[i] << " / " << s.size();
     aux[i] = aux[i] / s.size();
-    // std::cout << " = " << aux[i] << "\n";
   }
+  return aux;
+}
+
+
+float Problem::get_distance(int first, int second){
+  float aux = 0;
+  for(int i = 0; i < k_; i++){
+    aux += pow(get_item(first, i) - get_item(second, i), 2);
+  }
+  aux = sqrt(aux);
   return aux;
 }

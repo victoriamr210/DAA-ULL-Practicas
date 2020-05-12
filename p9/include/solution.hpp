@@ -20,6 +20,10 @@ class Solution{
       time_ = time;
     }
 
+    std::vector<int> get_vector(void){
+      return sol_;
+    }
+
     void write(void){
 
       for(int i = 0; i < sol_.size(); i++){

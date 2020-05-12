@@ -10,6 +10,7 @@
 #include <chrono>
 
 class voraz : public algorithm{
+  public:
   Problem p_;
   int M = 3;
 

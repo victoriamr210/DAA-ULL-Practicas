@@ -4,6 +4,7 @@
 #include "../include/voraz.hpp"
 #include "../include/newVoraz.hpp"
 #include "../include/strategy.hpp"
+#include "../include/localSearch.hpp"
 #include "../include/GRASP.hpp"
 
 int main(int argc, char* argv[]) {
@@ -18,6 +19,9 @@ int main(int argc, char* argv[]) {
       v->get_solution(p);
       std::cout << "\n-------New Voraz------\n";
       v->set_a(new newVoraz());
+      v->get_solution(p);
+      std::cout << "\n-------Busqueda Local------\n";
+      v->set_a(new localSearch());
       v->get_solution(p);
       std::cout << "\n-------GRASP------\n";
       v->set_a(new GRASP());

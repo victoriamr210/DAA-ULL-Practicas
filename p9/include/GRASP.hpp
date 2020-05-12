@@ -88,10 +88,7 @@ class GRASP : public algorithm{
       std::vector<int> rcl = buildRCL(sol);
       int element = select_random(rcl);
       sol.push_back(element);
-
     }
-    // for (int i = 0; i < M -1; i++){
-    // }
     return sol;
   }
 
@@ -121,18 +118,6 @@ class GRASP : public algorithm{
 
     return aux;
   }
-
-  // std::vector<int> local_search(std::vector<int> sol){
-  //   bool flag = true;
-  //   while (flag) {
-  //     flag = false;
-  //     std::vector<int> aux = exchange(sol);
-  //     if (aux != sol){
-  //       flag = true;
-  //     }
-  //   }
-  //   return sol;
-  // }
 
   std::vector<int> local_search(std::vector<int> sol){
     std::vector<int> cand = get_candidates(sol);

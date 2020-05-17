@@ -11,6 +11,7 @@ class Solution{
     float dis_;
   
   public:
+    Solution(){}
     Solution(Problem& p, std::vector<int> sol, float dis) {
       p_ = p;
       sol_ = sol;
@@ -22,6 +23,10 @@ class Solution{
 
     std::vector<int> get_vector(void){
       return sol_;
+    }
+
+    float get_value() {
+      return dis_;
     }
 
     void write(void){

@@ -12,12 +12,20 @@
 class voraz : public algorithm{
   public:
   Problem p_;
-  int M = 3;
+  int M;
+  voraz(){}
+  voraz(int m) {
+    M = m;
+  }
+
+  void set_m(int m) {
+    M = m;
+  }
 
   void set_problem(Problem& p){
     p_ = p;
   }
-  void solve(Problem& p){
+  Solution solve(Problem& p){
     srand(time(NULL));
     set_problem(p);
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -26,6 +34,7 @@ class voraz : public algorithm{
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
     s.write();
+    return s;
   }
 
   Solution execute(void){

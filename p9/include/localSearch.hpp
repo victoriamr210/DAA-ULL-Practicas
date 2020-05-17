@@ -14,26 +14,33 @@
 
 class localSearch : public algorithm{
   Problem p_;
-  int M = 3;
-
-  voraz greedy; 
+  int M;
+  public:
+  // voraz greedy;
+  Solution initial; 
+  localSearch(int m, Solution i) {
+    M = m;
+    initial = i;
+    // greedy.set_m(m);
+  }
 
   void set_problem(Problem& p){
     p_ = p;
   }
 
-  void solve(Problem& p){
+  Solution solve(Problem& p){
     srand(time(NULL));
     set_problem(p);
     auto t1 = std::chrono::high_resolution_clock::now();
-    greedy.set_problem(p);
-    Solution aux = greedy.execute();
-    std::vector<int> sol = aux.get_vector();
+    // greedy.set_problem(p);
+    // Solution aux = greedy.execute();
+    std::vector<int> sol = initial.get_vector();
     Solution s = execute(sol);
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
     s.write();
+    return s;
   }
 
   std::vector<int> random_solution(void) {
@@ -62,21 +69,27 @@ class localSearch : public algorithm{
   }
 
   std::vector<int> local_search(std::vector<int> sol){
-    std::vector<int> cand = get_candidates(sol);
     float distance = get_total(sol);
-    std::vector<int> optimum = sol;
-    for(int i = 0; i < sol.size(); i++){
-      int auxItem = sol[i];
-      for (int j = 0; j < cand.size(); j++){
-        sol[i] = cand[j];
-        float auxDistance = get_total(sol);
-        if (auxDistance > distance) {
-          distance = auxDistance;
-          optimum = sol;
+    std::vector<int> optimum;
+    std::vector<int> aux = sol;
+    bool change = false;
+    do {
+      std::vector<int> cand = get_candidates(aux);
+      change = false;
+      for(int i = 0; i < aux.size(); i++){
+        int auxItem = aux[i];
+        for (int j = 0; j < cand.size(); j++){
+          aux[i] = cand[j];
+          float auxDistance = get_total(aux);
+          if (auxDistance > distance) {
+            distance = auxDistance;
+            optimum = aux;
+            change = true;
+          }
         }
+        aux[i] = auxItem;
       }
-      sol[i] = auxItem;
-    }
+    } while (change);
     return optimum;
   }
 

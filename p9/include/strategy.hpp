@@ -4,7 +4,7 @@
 
 class algorithm {
   public:
-    virtual void solve(Problem& p)=0;
+    virtual Solution solve(Problem& p)=0;
 };
 
 class resolve {
@@ -24,9 +24,9 @@ class resolve {
       a_=a;
     }
 
-    void get_solution(Problem& p){
+    Solution get_solution(Problem& p){
       if(a_){
-        a_->solve(p);
+        return a_->solve(p);
       } else {
         std::cout << "Error\n";
       }

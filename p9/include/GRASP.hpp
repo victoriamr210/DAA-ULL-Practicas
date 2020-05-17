@@ -12,9 +12,14 @@
 
 class GRASP : public algorithm{
   Problem p_;
-  int M = 3;
+  int M;
   const int RCL_size = 3;
   const int ITERATIONS = 10;
+
+  public:
+  GRASP(int m) {
+    M = m;
+  }
 
   void set_problem(Problem& p){
     p_ = p;
@@ -28,7 +33,7 @@ class GRASP : public algorithm{
     return v[0];
   }
 
-  void solve(Problem &p) {
+  Solution solve(Problem &p) {
     srand(time(NULL));
     set_problem(p);
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -37,6 +42,7 @@ class GRASP : public algorithm{
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
     s.write();
+    return s;
   }
 
   std::vector<int> random_solution(void) {
@@ -119,22 +125,29 @@ class GRASP : public algorithm{
     return aux;
   }
 
+
   std::vector<int> local_search(std::vector<int> sol){
-    std::vector<int> cand = get_candidates(sol);
     float distance = get_total(sol);
-    std::vector<int> optimum = sol;
-    for(int i = 0; i < sol.size(); i++){
-      int auxItem = sol[i];
-      for (int j = 0; j < cand.size(); j++){
-        sol[i] = cand[j];
-        float auxDistance = get_total(sol);
-        if (auxDistance > distance) {
-          distance = auxDistance;
-          optimum = sol;
+    std::vector<int> optimum;
+    std::vector<int> aux = sol;
+    bool change = false;
+    do {
+      std::vector<int> cand = get_candidates(aux);
+      change = false;
+      for(int i = 0; i < aux.size(); i++){
+        int auxItem = aux[i];
+        for (int j = 0; j < cand.size(); j++){
+          aux[i] = cand[j];
+          float auxDistance = get_total(aux);
+          if (auxDistance > distance) {
+            distance = auxDistance;
+            optimum = aux;
+            change = true;
+          }
         }
+        aux[i] = auxItem;
       }
-      sol[i] = auxItem;
-    }
+    } while (change);
     return optimum;
   }
 

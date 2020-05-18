@@ -62,12 +62,14 @@ class Solution{
     void write(void){
 
       for(int i = 0; i < sol_.size(); i++){
-        std::cout << "Vector " << sol_[i] << " ";
-        for(int j = 0; j < p_.get_dimension(); j++){
-          std::cout << p_.get_item(sol_[i], j) << " ";
-        }
-      std::cout << "\n";
+        std::cout <<  sol_[i] << " ";
+
+        // std::cout << "Vector " << sol_[i] << " ";
+        // for(int j = 0; j < p_.get_dimension(); j++){
+        //   std::cout << p_.get_item(sol_[i], j) << " ";
+        // }
       }
+      std::cout << "\n";
       std::cout << "Distancia total: " << dis_ << "\n";
       std::cout << "Tiempo de ejecucion: " << time_ << " microsegundos\n";
     }

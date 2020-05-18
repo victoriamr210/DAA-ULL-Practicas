@@ -1,0 +1,120 @@
+
+M------> 2
+
+-------Ramificacion y poda (inferior voraz / cota superior pequeña)------
+Nodos generados: 63
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 28728 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / cota superior pequeña)------
+Nodos generados: 86
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 39047 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / cota superior pequeña)------
+Nodos generados: 63
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 28178 microsegundos
+
+-------Ramificacion y poda (inferior voraz / nodo mas profundo)------
+Nodos generados: 63
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 28213 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / nodo mas profundo)------
+Nodos generados: 86
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 38346 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / nodo mas profundo)------
+Nodos generados: 63
+6 16 
+Distancia total: 13.0737
+Tiempo de ejecucion: 28727 microsegundos
+
+M------> 3
+
+-------GRASP------
+
+M------> 4
+
+-------Ramificacion y poda (inferior voraz / cota superior pequeña)------
+Nodos generados: 3408
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 1911915 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / cota superior pequeña)------
+Nodos generados: 3343
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 2044823 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / cota superior pequeña)------
+Nodos generados: 3408
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 2206864 microsegundos
+
+-------Ramificacion y poda (inferior voraz / nodo mas profundo)------
+Nodos generados: 3380
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 1925803 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / nodo mas profundo)------
+Nodos generados: 3343
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 1922007 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / nodo mas profundo)------
+Nodos generados: 3380
+5 13 16 23 
+Distancia total: 63.702
+Tiempo de ejecucion: 2002290 microsegundos
+
+M------> 5
+
+M------> 5
+
+-------Ramificacion y poda (inferior voraz / cota superior pequeña)------
+Nodos generados: 20728
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 35546110 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / cota superior pequeña)------
+Nodos generados: 20337
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 39200603 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / cota superior pequeña)------
+Nodos generados: 20337
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 38030023 microsegundos
+
+-------Ramificacion y poda (inferior voraz / nodo mas profundo)------
+Nodos generados: 20682
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 49661152 microsegundos
+
+-------Ramificacion y poda (inferior nuevo voraz / nodo mas profundo)------
+Nodos generados: 20337
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 46026613 microsegundos
+
+-------Ramificacion y poda (inferior GRASP / nodo mas profundo)------
+Nodos generados: 20337
+5 13 14 16 23 
+Distancia total: 99.592
+Tiempo de ejecucion: 43355166 microsegundos

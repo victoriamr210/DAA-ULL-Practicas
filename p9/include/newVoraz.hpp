@@ -51,7 +51,7 @@ class newVoraz : public algorithm{
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
-    s.write();
+    // s.write();
     return s;
   }
 

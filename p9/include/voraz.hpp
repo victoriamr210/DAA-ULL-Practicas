@@ -13,7 +13,7 @@
  * @brief Clase voraz, implementa el algoritmo voraz que resuelve el problema
  * 
  */
-class voraz : public algorithm{
+class Voraz : public algorithm{
   public:
   Problem p_; //problema actual
   int M; //tamaño de la solución
@@ -21,13 +21,13 @@ class voraz : public algorithm{
    * @brief Constructor por defecto
    * 
    */
-  voraz(){}
+  Voraz(){}
   /**
    * @brief Constructor con tamaño de solución
    * 
    * @param m Tamaño de solución
    */
-  voraz(int m) {
+  Voraz(int m) {
     M = m;
   }
 
@@ -62,7 +62,7 @@ class voraz : public algorithm{
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
-    s.write();
+    // s.write();
     return s;
   }
 

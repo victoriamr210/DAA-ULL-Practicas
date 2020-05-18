@@ -44,6 +44,18 @@ class RyP : public algorithm {
   }
 
   /**
+   * @brief Funcion que devuelve si un numero es mayor o igual que otro
+   * 
+   * @param a 
+   * @param b 
+   * @return true 
+   * @return false 
+   */
+  bool greaterEqual(float a, float b){
+    return (a-b) >= -0.001;
+  }
+
+  /**
    * @brief Setter del problema actual
    * 
    * @param p 
@@ -61,7 +73,9 @@ class RyP : public algorithm {
   std::vector<int> get_candidates(std::vector<int> sol){
     std::vector<int> cand;
     for(int i = 0; i < p_.get_elements(); i++){
+      // if(std::find(sol.begin(), sol.end(), i) != sol.end()){
         cand.push_back(i);
+      // }
     }
     for(int i = 0; i < sol.size(); i++){
       cand.erase(std::find(cand.begin(), cand.end(), sol[i]));
@@ -83,6 +97,7 @@ class RyP : public algorithm {
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
     s.set_time(duration);
+    std::cout << "Nodos generados: " << tree_.size() << "\n";
     s.write();
     return s;
 
@@ -273,7 +288,7 @@ class RyP : public algorithm {
         tree_[i].set_solution(true);
         // std::cout << "hola\n";
         std::vector<int> s  = tree_[i].get_sol();
-        if(get_total(s) >= lower_bound) {
+        if(greaterEqual(get_total(s), lower_bound)) {
           lower_bound = get_total(s);
           currentSol = s;
         }

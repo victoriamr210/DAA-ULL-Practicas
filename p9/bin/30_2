@@ -1,0 +1,63 @@
+
+M------> 2
+-------Voraz------
+8 27 
+Distancia total: 11.6571
+Tiempo de ejecucion: 43 microsegundos
+
+-------New Voraz------
+8 27 
+Distancia total: 11.6571
+Tiempo de ejecucion: 116 microsegundos
+
+-------Busqueda Local (inicial voraz) ------
+8 27 
+Distancia total: 11.6571
+Tiempo de ejecucion: 24 microsegundos
+
+M------> 3
+8 27 1 
+Distancia total: 28.9443
+Tiempo de ejecucion: 19 microsegundos
+
+-------New Voraz------
+1 8 27 
+Distancia total: 28.9443
+Tiempo de ejecucion: 110 microsegundos
+
+-------Busqueda Local (inicial voraz) ------
+8 27 1 
+Distancia total: 28.9443
+Tiempo de ejecucion: 46 microsegundos
+
+M------> 4
+-------Voraz------
+8 27 1 10 
+Distancia total: 52.7712
+Tiempo de ejecucion: 23 microsegundos
+
+-------New Voraz------
+1 8 10 27 
+Distancia total: 52.7712
+Tiempo de ejecucion: 108 microsegundos
+
+-------Busqueda Local (inicial voraz) ------
+8 27 1 10 
+Distancia total: 52.7712
+Tiempo de ejecucion: 84 microsegundos
+
+M------> 5
+-------Voraz------
+8 27 1 10 12 
+Distancia total: 80.9102
+Tiempo de ejecucion: 27 microsegundos
+
+-------New Voraz------
+1 8 10 12 27 
+Distancia total: 80.9102
+Tiempo de ejecucion: 106 microsegundos
+
+-------Busqueda Local (inicial voraz) ------
+8 27 1 10 12 
+Distancia total: 80.9102
+Tiempo de ejecucion: 144 microsegundos

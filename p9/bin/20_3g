@@ -1,0 +1,152 @@
+
+M------> 2
+
+size------> 2
+
+iterations------> 10
+
+-------GRASP------
+13 12 
+Distancia total: 11.8003
+Tiempo de ejecucion: 633 microsegundos
+
+size------> 3
+
+iterations------> 10
+
+-------GRASP------
+2 16 
+Distancia total: 11.5909
+Tiempo de ejecucion: 701 microsegundos
+
+size------> 2
+
+iterations------> 20
+
+-------GRASP------
+13 12 
+Distancia total: 11.8003
+Tiempo de ejecucion: 1094 microsegundos
+
+size------> 3
+
+iterations------> 20
+
+-------GRASP------
+13 12 
+Distancia total: 11.8003
+Tiempo de ejecucion: 2098 microsegundos
+
+M------> 3
+
+size------> 2
+
+iterations------> 10
+
+-------GRASP------
+7 13 12 
+Distancia total: 30.8727
+Tiempo de ejecucion: 3458 microsegundos
+
+size------> 3
+
+iterations------> 10
+
+-------GRASP------
+7 12 13 
+Distancia total: 30.8727
+Tiempo de ejecucion: 1493 microsegundos
+
+size------> 2
+
+iterations------> 20
+
+-------GRASP------
+7 13 12 
+Distancia total: 30.8727
+Tiempo de ejecucion: 3629 microsegundos
+
+size------> 3
+
+iterations------> 20
+
+-------GRASP------
+7 12 13 
+Distancia total: 30.8727
+Tiempo de ejecucion: 2451 microsegundos
+
+M------> 4
+
+size------> 2
+
+iterations------> 10
+
+-------GRASP------
+2 12 13 16 
+Distancia total: 56.6903
+Tiempo de ejecucion: 2340 microsegundos
+
+size------> 3
+
+iterations------> 10
+
+-------GRASP------
+16 2 13 12 
+Distancia total: 56.6903
+Tiempo de ejecucion: 2674 microsegundos
+
+size------> 2
+
+iterations------> 20
+
+-------GRASP------
+2 12 13 16 
+Distancia total: 56.6903
+Tiempo de ejecucion: 3746 microsegundos
+
+size------> 3
+
+iterations------> 20
+
+-------GRASP------
+2 13 12 16 
+Distancia total: 56.6903
+Tiempo de ejecucion: 6127 microsegundos
+
+M------> 5
+
+size------> 2
+
+iterations------> 10
+
+-------GRASP------
+12 2 7 13 16 
+Distancia total: 92.8298
+Tiempo de ejecucion: 3942 microsegundos
+
+size------> 3
+
+iterations------> 10
+
+-------GRASP------
+2 16 13 7 12 
+Distancia total: 92.8297
+Tiempo de ejecucion: 4161 microsegundos
+
+size------> 2
+
+iterations------> 20
+
+-------GRASP------
+12 2 7 13 16 
+Distancia total: 92.8298
+Tiempo de ejecucion: 6517 microsegundos
+
+size------> 3
+
+iterations------> 20
+
+-------GRASP------
+12 16 7 2 13 
+Distancia total: 92.8298
+Tiempo de ejecucion: 11856 microsegundos

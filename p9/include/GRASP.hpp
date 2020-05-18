@@ -10,21 +10,41 @@
 #include <limits>
 #include <chrono>
 
+/**
+ * @brief Clase GRASP, implementa un algoritmo grasp para resolver el problema
+ * 
+ */
 class GRASP : public algorithm{
-  Problem p_;
-  int M;
-  const int RCL_size = 3;
-  const int ITERATIONS = 10;
+  Problem p_; //problema actual
+  int M; //tamaño de solución
+  const int RCL_size = 3; //tamaño de lista de candidatos
+  const int ITERATIONS = 10; //número máximo de iteraciones
 
   public:
+  /**
+   * @brief Constructor dado un tamaño de solución
+   * 
+   * @param m 
+   */
   GRASP(int m) {
     M = m;
   }
 
+  /**
+   * @brief Set del problema actual
+   * 
+   * @param p 
+   */
   void set_problem(Problem& p){
     p_ = p;
   }
 
+  /**
+   * @brief Seleciona un elemento aleatorio de un conjunto de elementos
+   * 
+   * @param v 
+   * @return int 
+   */
   int select_random(std::vector<int> v){
     if (v.size() > 1) {
       int index = rand() % v.size();
@@ -33,6 +53,12 @@ class GRASP : public algorithm{
     return v[0];
   }
 
+  /**
+   * @brief Función que inicia la ejecución y muestra la solución
+   * 
+   * @param p Problema actual
+   * @return Solution 
+   */
   Solution solve(Problem &p) {
     srand(time(NULL));
     set_problem(p);
@@ -45,25 +71,13 @@ class GRASP : public algorithm{
     return s;
   }
 
-  std::vector<int> random_solution(void) {
-    std::vector<int> s;
-    for(int i = 0; i < M; i++){
-      s.push_back(rand() % p_.get_elements());
-    }
-    return s;
-  }
-
-  std::vector<int> get_candidates(std::vector<int> sol){
-    std::vector<int> cand;
-    for(int i = 0; i < p_.get_elements(); i++){
-        cand.push_back(i);
-    }
-    for(int i = 0; i < sol.size(); i++){
-      cand.erase(std::find(cand.begin(), cand.end(), sol[i]));
-    }
-    return cand;
-  }
-
+  
+  
+  /**
+   * @brief Función que lleva a acabo la ejecución del algoritmo
+   * 
+   * @return Solution 
+   */
   Solution execute(void) {
     float distance = std::numeric_limits<float>::min();
     int cont = 0;
@@ -85,6 +99,11 @@ class GRASP : public algorithm{
     return Solution(p_, bestSol, distance);
   }
 
+  /**
+   * @brief Fase constructiva de grasp, genera la rcl y elige un elemento aleatorio
+   * 
+   * @return std::vector<int> 
+   */
   std::vector<int> constructor(){
     int n = p_.get_elements();
     int k = rand() %  (n - 2) + 2;
@@ -98,6 +117,12 @@ class GRASP : public algorithm{
     return sol;
   }
 
+  /**
+   * @brief Construye la rcl dada un solución.
+   * 
+   * @param sol 
+   * @return std::vector<int> 
+   */
   std::vector<int> buildRCL(std::vector<int> sol) {
     std::vector<int> cand = get_candidates(sol);
     std::vector<int> vectors;
@@ -125,7 +150,13 @@ class GRASP : public algorithm{
     return aux;
   }
 
-
+  /**
+   * @brief Función que implementa la búsqueda local mediante intercambio
+   * dada una solución
+   * 
+   * @param sol 
+   * @return std::vector<int> 
+   */
   std::vector<int> local_search(std::vector<int> sol){
     float distance = get_total(sol);
     std::vector<int> optimum;
@@ -151,6 +182,29 @@ class GRASP : public algorithm{
     return optimum;
   }
 
+  /**
+   * @brief Devuelve los elementos no incluidos en una solución
+   * 
+   * @param sol 
+   * @return std::vector<int> 
+   */
+  std::vector<int> get_candidates(std::vector<int> sol){
+    std::vector<int> cand;
+    for(int i = 0; i < p_.get_elements(); i++){
+        cand.push_back(i);
+    }
+    for(int i = 0; i < sol.size(); i++){
+      cand.erase(std::find(cand.begin(), cand.end(), sol[i]));
+    }
+    return cand;
+  }
+
+  /**
+   * @brief Devuelve la diversión total dada una solución 
+   * 
+   * @param sol Conjunto solución
+   * @return float 
+   */
   float get_total(std::vector<int> sol) {
     float aux = 0;
     for(int i = 0; i < sol.size(); i++) {

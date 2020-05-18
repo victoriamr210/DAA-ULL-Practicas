@@ -10,18 +10,39 @@
 #include <limits>
 #include <chrono>
 
+/**
+ * @brief Clase newVoraz, implementa un algoritmo voraz destructivo para resolver
+ * el problema
+ * 
+ */
 class newVoraz : public algorithm{
-  Problem p_;
-  int M;
+  Problem p_; //problema actual
+  int M; //tamaño de la solución
   public:
+  /**
+   * @brief Constructor dado un tamaño de solución
+   * 
+   * @param m 
+   */
   newVoraz(int m){
     M = m;
   }
 
+  /**
+   * @brief Set del problema actual
+   * 
+   * @param p 
+   */
   void set_problem(Problem& p){
     p_ = p;
   }
 
+  /**
+   * @brief Función que inicia la ejecución y muestra la solución
+   * 
+   * @param p Problema actual
+   * @return Solution 
+   */
   Solution solve(Problem& p){
     srand(time(NULL));
     set_problem(p);
@@ -34,6 +55,11 @@ class newVoraz : public algorithm{
     return s;
   }
 
+  /**
+   * @brief Función que lleva a acabo la ejecución del algoritmo
+   * 
+   * @return Solution 
+   */
   Solution execute(void){
     std::vector<int> elem;
     for(int i = 0; i < p_.get_elements(); i++) {
@@ -41,10 +67,9 @@ class newVoraz : public algorithm{
     }
     std::vector<int> s = elem;
     std::vector<float> Sc = p_.center(elem);
-    // float distance = 0;
 
     while (s.size() != M){
-      int sStar = furthest(Sc, elem);
+      int sStar = closest(Sc, elem);
       s.erase(std::find(s.begin(), s.end(), sStar));
       elem.erase(std::find(elem.begin(), elem.end(), sStar));
       Sc = p_.center(s);
@@ -53,9 +78,14 @@ class newVoraz : public algorithm{
     return Solution(p_, s, distance);
   }
 
-
-  int furthest(std::vector<float> Sc, std::vector<int> elem) {
-    // std::cout << "\n\nfurthset" << elem.size() << "\n";
+  /**
+   * @brief Busca el elemento mas cercano dado un centro de gravedad
+   * 
+   * @param Sc centro
+   * @param elem conjunto de elementos en donde buscar
+   * @return int 
+   */
+  int closest(std::vector<float> Sc, std::vector<int> elem) {
     std::numeric_limits<int>::min();
     float distance = std::numeric_limits<float>::max();
     int sol;
@@ -85,6 +115,12 @@ class newVoraz : public algorithm{
     return sol;
   }
 
+  /**
+   * @brief Devuelve la diversión total dada una solución 
+   * 
+   * @param sol Conjunto solución
+   * @return float 
+   */
   float get_total(std::vector<int> sol){
     float aux = 0;
     for(int i = 0; i < sol.size(); i++) {

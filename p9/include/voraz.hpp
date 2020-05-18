@@ -9,22 +9,51 @@
 #include <time.h>
 #include <chrono>
 
+/**
+ * @brief Clase voraz, implementa el algoritmo voraz que resuelve el problema
+ * 
+ */
 class voraz : public algorithm{
   public:
-  Problem p_;
-  int M;
+  Problem p_; //problema actual
+  int M; //tamaño de la solución
+  /**
+   * @brief Constructor por defecto
+   * 
+   */
   voraz(){}
+  /**
+   * @brief Constructor con tamaño de solución
+   * 
+   * @param m Tamaño de solución
+   */
   voraz(int m) {
     M = m;
   }
 
+  /**
+   * @brief Set tamaño de solución
+   * 
+   * @param m 
+   */
   void set_m(int m) {
     M = m;
   }
-
+  /**
+   * @brief Set el problema actual
+   * 
+   * @param p 
+   */
   void set_problem(Problem& p){
     p_ = p;
   }
+  
+  /**
+   * @brief Función que inicia la ejecución y muestra la solución
+   * 
+   * @param p Problema actual
+   * @return Solution 
+   */
   Solution solve(Problem& p){
     srand(time(NULL));
     set_problem(p);
@@ -37,6 +66,11 @@ class voraz : public algorithm{
     return s;
   }
 
+  /**
+   * @brief Función que lleva a acabo la ejecución del algoritmo
+   * 
+   * @return Solution 
+   */
   Solution execute(void){
     std::vector<int> elem;
     for(int i = 0; i < p_.get_elements(); i++) {
@@ -44,10 +78,9 @@ class voraz : public algorithm{
     }
     std::vector<int> s;
     std::vector<float> Sc = p_.center(elem);
-    // float distance = 0;
 
     while (s.size() != M){
-      int sStar = closest(Sc, elem);
+      int sStar = furthest(Sc, elem);
       s.push_back(sStar);
       elem.erase(std::find(elem.begin(), elem.end(), sStar));
       Sc = p_.center(s);
@@ -56,8 +89,14 @@ class voraz : public algorithm{
     return Solution(p_, s, distance);
   }
 
-
-  int closest(std::vector<float> Sc, std::vector<int> elem) {
+  /**
+   * @brief Busca el elemento mas alejado dado un centro de gravedad
+   * 
+   * @param Sc centro
+   * @param elem conjunto de elementos en donde buscar
+   * @return int 
+   */
+  int furthest(std::vector<float> Sc, std::vector<int> elem) {
     float distance = 0;
     int sol;
     std::vector<int> repeat;
@@ -86,6 +125,12 @@ class voraz : public algorithm{
     return sol;
   }
 
+  /**
+   * @brief Devuelve la diversión total dada una solución 
+   * 
+   * @param sol Conjunto solución
+   * @return float 
+   */
   float get_total(std::vector<int> sol){
     float aux = 0;
     for(int i = 0; i < sol.size(); i++) {

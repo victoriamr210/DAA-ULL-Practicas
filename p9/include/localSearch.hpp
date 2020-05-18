@@ -11,29 +11,46 @@
 #include <limits>
 #include <chrono>
 
-
+/**
+ * @brief Clase localSearch, implementa un algoritmo de búsqueda local
+ * dada una solución inicial para resolver el problema
+ * 
+ */
 class localSearch : public algorithm{
-  Problem p_;
-  int M;
+  Problem p_; //problema actual
+  int M; //tamaño de solución
   public:
-  // voraz greedy;
-  Solution initial; 
+  Solution initial; //solución incial
+  /**
+   * @brief Constructor dado un tamaño de solución y solución inicial
+   * 
+   * @param m tamaño de solución
+   * @param i solución inicial
+   */
   localSearch(int m, Solution i) {
     M = m;
     initial = i;
-    // greedy.set_m(m);
   }
 
+  /**
+   * @brief Set el problema actual
+   * 
+   * @param p 
+   */
   void set_problem(Problem& p){
     p_ = p;
   }
 
+  /**
+   * @brief Función que inicia la ejecución y muestra la solución
+   * 
+   * @param p Problema actual
+   * @return Solution 
+   */
   Solution solve(Problem& p){
     srand(time(NULL));
     set_problem(p);
     auto t1 = std::chrono::high_resolution_clock::now();
-    // greedy.set_problem(p);
-    // Solution aux = greedy.execute();
     std::vector<int> sol = initial.get_vector();
     Solution s = execute(sol);
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -43,14 +60,11 @@ class localSearch : public algorithm{
     return s;
   }
 
-  std::vector<int> random_solution(void) {
-    std::vector<int> s;
-    for(int i = 0; i < M; i++){
-      s.push_back(rand() % p_.get_elements());
-    }
-    return s;
-  }
-
+  /**
+   * @brief Función que lleva a acabo la ejecución del algoritmo
+   * 
+   * @return Solution 
+   */
   Solution execute(std::vector<int> sol){
     std::vector<int> solution = sol;
     float distance = get_total(sol);
@@ -68,6 +82,13 @@ class localSearch : public algorithm{
 
   }
 
+  /**
+   * @brief Función que implementa la busqueda local mediante un intercambio
+   * de elementos, se intercambia sólo uno
+   * 
+   * @param sol solución actual
+   * @return std::vector<int> 
+   */
   std::vector<int> local_search(std::vector<int> sol){
     float distance = get_total(sol);
     std::vector<int> optimum;
@@ -93,6 +114,12 @@ class localSearch : public algorithm{
     return optimum;
   }
 
+  /**
+   * @brief Devuelve conjunto de elementos no incluidos en la solución
+   * 
+   * @param sol 
+   * @return std::vector<int> 
+   */
   std::vector<int> get_candidates(std::vector<int> sol){
     std::vector<int> cand;
     for(int i = 0; i < p_.get_elements(); i++){
@@ -104,6 +131,12 @@ class localSearch : public algorithm{
     return cand;
   }
 
+  /**
+   * @brief Devuelve la diversión total dada una solución 
+   * 
+   * @param sol Conjunto solución
+   * @return float 
+   */
   float get_total(std::vector<int> sol){
     float aux = 0;
     for(int i = 0; i < sol.size(); i++) {
